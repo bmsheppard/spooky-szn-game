@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=18 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://ship.gd" id="1_b2cei"]
 [ext_resource type="Script" path="res://camera.gd" id="1_ivsra"]
+[ext_resource type="Shader" path="res://circle.gdshader" id="1_v30pg"]
 [ext_resource type="Texture2D" uid="uid://miqqswk3tst6" path="res://assets/sonar.png" id="2_ern3p"]
 [ext_resource type="Script" path="res://sonar.gd" id="2_welkv"]
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="3_0rati"]
@@ -19,74 +20,99 @@ volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
 volumetric_fog_temporal_reprojection_enabled = false
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
-size = Vector3(0, 10000, 0)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jfdlk"]
+shader = ExtResource("1_v30pg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_68rxq"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkt4"]
 shader = ExtResource("6_07dsr")
 shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
 shader_parameter/base_color = Color(0.2, 1, 0.4, 1)
 shader_parameter/brightness = 2.0
-shader_parameter/noise_level = 0.5
-shader_parameter/vignette_level = 0.4
-shader_parameter/edge_x = 0.75
-shader_parameter/edge_y = 4.0
+shader_parameter/noise_level = 0.8
+shader_parameter/vignette_level = 0.37
+shader_parameter/edge_x = 1.0
+shader_parameter/edge_y = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
+size = Vector3(0, 10000, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
 
 [node name="periscope" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s2tm8")
 
-[node name="ship" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
-script = ExtResource("1_b2cei")
+[node name="ship_inside" type="Node2D" parent="."]
 
-[node name="ship_inside" type="Node2D" parent="ship"]
+[node name="periscope" type="Node2D" parent="ship_inside"]
 
-[node name="sonar" type="Node2D" parent="ship/ship_inside"]
+[node name="Sprite2D" type="Sprite2D" parent="ship_inside/periscope"]
+material = SubResource("ShaderMaterial_jfdlk")
+position = Vector2(553, 163)
+texture = SubResource("ViewportTexture_68rxq")
+
+[node name="sonar" type="Node2D" parent="ship_inside"]
 z_as_relative = false
 position = Vector2(550, 480)
 script = ExtResource("2_welkv")
 
-[node name="sonar_base" type="Sprite2D" parent="ship/ship_inside/sonar"]
+[node name="sonar_base" type="Sprite2D" parent="ship_inside/sonar"]
 texture_filter = 1
 texture = ExtResource("2_ern3p")
 
-[node name="sonar_line" type="Sprite2D" parent="ship/ship_inside/sonar"]
+[node name="sonar_line" type="Sprite2D" parent="ship_inside/sonar"]
 texture_filter = 1
 texture = ExtResource("3_0rati")
 
-[node name="steering" type="Node2D" parent="ship/ship_inside"]
+[node name="steering" type="Node2D" parent="ship_inside"]
 position = Vector2(549, 484)
 script = ExtResource("5_1ssrq")
 
-[node name="wheel" type="Sprite2D" parent="ship/ship_inside/steering"]
+[node name="wheel" type="Sprite2D" parent="ship_inside/steering"]
 position = Vector2(300, 0)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_n7ycc")
 
-[node name="lever" type="Node2D" parent="ship/ship_inside/steering"]
+[node name="lever" type="Node2D" parent="ship_inside/steering"]
 texture_filter = 1
 position = Vector2(500, 0)
 scale = Vector2(1.5, 1.5)
 
-[node name="lever_base" type="Sprite2D" parent="ship/ship_inside/steering/lever"]
+[node name="lever_base" type="Sprite2D" parent="ship_inside/steering/lever"]
 texture = ExtResource("7_n73ec")
 
-[node name="lever_handle" type="Sprite2D" parent="ship/ship_inside/steering/lever"]
+[node name="lever_handle" type="Sprite2D" parent="ship_inside/steering/lever"]
 texture = ExtResource("8_5fneg")
 
-[node name="sonar_shape_3d" type="ShapeCast3D" parent="ship"]
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(320, 320)
+size_2d_override_stretch = true
+
+[node name="ColorRect2" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_fmkt4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ship" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
+script = ExtResource("1_b2cei")
+
+[node name="camera" type="Camera3D" parent="SubViewport/ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
+script = ExtResource("1_ivsra")
+
+[node name="sonar_shape_3d" type="ShapeCast3D" parent="SubViewport/ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
 shape = SubResource("BoxShape3D_gebbv")
 target_position = Vector3(0, 0, -200)
 debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
-
-[node name="camera" type="Camera3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
-script = ExtResource("1_ivsra")
 
 [node name="environment" type="Node3D" parent="."]
 
@@ -118,12 +144,3 @@ material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = SubResource("ShaderMaterial_fmkt4")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
