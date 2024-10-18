@@ -32,10 +32,9 @@ texture = ExtResource("2_ern3p")
 texture_filter = 1
 texture = ExtResource("3_0rati")
 
-[node name="sonar_shape_3d" type="ShapeCast3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
+[node name="sonar_shape_3d" type="ShapeCast3D" parent="ship/ship_inside/sonar"]
 shape = SubResource("BoxShape3D_gebbv")
-target_position = Vector3(0, 0, -200)
+target_position = Vector3(0, 0, -500)
 debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 
 [node name="camera" type="Camera3D" parent="ship"]
@@ -44,9 +43,34 @@ script = ExtResource("1_ivsra")
 
 [node name="environment" type="Node3D" parent="."]
 
-[node name="ground" type="CSGBox3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30327, -17.5797, -1.6549)
+[node name="ground" type="Area3D" parent="environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.565558, 1.3813)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="environment/ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30327, -17.0141, -3.0362)
 size = Vector3(197.866, 0.203186, 449.211)
+material = SubResource("StandardMaterial3D_6m3fw")
+
+[node name="cube1" type="Area3D" parent="environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.565558, 1.3813)
+visible = false
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="environment/cube1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8881, 20.2352, -52.8118)
+size = Vector3(10, 10, 10)
+material = SubResource("StandardMaterial3D_6m3fw")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="environment/cube1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.8881, 18.2352, 39.4424)
+size = Vector3(10, 10, 10)
+material = SubResource("StandardMaterial3D_6m3fw")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="environment/cube1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.5393, 14.2352, 39.4424)
+size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="cube2" type="CSGBox3D" parent="environment"]
@@ -58,13 +82,6 @@ material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="cube3" type="CSGBox3D" parent="environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.3578, 14.2364, -104.421)
-use_collision = true
-collision_mask = 0
-size = Vector3(10, 10, 10)
-material = SubResource("StandardMaterial3D_6m3fw")
-
-[node name="cube4" type="CSGBox3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.88383, 14.2364, -194.983)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
