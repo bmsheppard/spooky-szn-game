@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var ship = $"../.."
+@onready var ship = $"../../SubViewport/ship"
 @onready var wheel = $wheel
 @onready var lever_handle = $lever/lever_handle
 
@@ -12,7 +12,6 @@ const RISE_RATE = 0.1
 
 
 func _input(event):
-	# temp for testing (rotating the ship)
 	if Input.is_key_pressed(KEY_A):
 		wheel.rotate(-0.01)
 		wheel.rotation = clamp(wheel.rotation, -1*MAX_TURN, MAX_TURN)

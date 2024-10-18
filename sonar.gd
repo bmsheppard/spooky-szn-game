@@ -1,11 +1,10 @@
 extends Node2D
 
-
-@onready var ship = $"../.."
+@onready var ship = $"../../SubViewport/ship"
 
 @onready var sonar_base = $sonar_base
 @onready var sonar_line: Sprite2D = $sonar_line
-@onready var sonar_shape_3d = $"../../sonar_shape_3d"
+@onready var sonar_shape_3d = $"../../SubViewport/ship/sonar_shape_3d"
 
 const SONAR_HIT = preload("res://sonar_hit.tscn")
 
