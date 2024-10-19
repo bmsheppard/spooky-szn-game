@@ -3,3 +3,4 @@
 /android/
 .godot/**
 **/.DS_STORE
+*.tmp
