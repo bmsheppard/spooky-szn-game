@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=20 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://ship.gd" id="1_b2cei"]
 [ext_resource type="Script" path="res://camera.gd" id="1_ivsra"]
@@ -8,15 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="3_0rati"]
 [ext_resource type="Script" path="res://steering.gd" id="5_1ssrq"]
 [ext_resource type="Texture2D" uid="uid://enk1p7nocyb1" path="res://assets/wheel.png" id="5_n7ycc"]
+[ext_resource type="AudioStream" uid="uid://dm3wxlkw3q04o" path="res://assets/620321__marb7e__sonar-ping-sine-wave.wav" id="5_y83ba"]
 [ext_resource type="Shader" path="res://periscope.gdshader" id="6_07dsr"]
 [ext_resource type="Texture2D" uid="uid://cdv8hus40e320" path="res://assets/lever_base.png" id="7_n73ec"]
 [ext_resource type="Texture2D" uid="uid://bp5y1fnt3bivp" path="res://assets/lever_handle.png" id="8_5fneg"]
+[ext_resource type="AudioStream" uid="uid://b6w2b6yvqhom5" path="res://assets/329915__carmsie__underwater-sounds-loopable.wav" id="10_44kj0"]
 
 [sub_resource type="Environment" id="Environment_s2tm8"]
 fog_enabled = true
 fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
 fog_depth_begin = 0.0
-volumetric_fog_enabled = true
 volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
 volumetric_fog_temporal_reprojection_enabled = false
 
@@ -57,7 +58,8 @@ texture = SubResource("ViewportTexture_68rxq")
 
 [node name="sonar" type="Node2D" parent="ship_inside"]
 z_as_relative = false
-position = Vector2(550, 480)
+position = Vector2(550, 500)
+scale = Vector2(2, 0.8)
 script = ExtResource("2_welkv")
 
 [node name="sonar_base" type="Sprite2D" parent="ship_inside/sonar"]
@@ -68,18 +70,24 @@ texture = ExtResource("2_ern3p")
 texture_filter = 1
 texture = ExtResource("3_0rati")
 
+[node name="sonar_sound" type="AudioStreamPlayer" parent="ship_inside/sonar"]
+stream = ExtResource("5_y83ba")
+volume_db = -8.0
+pitch_scale = 0.8
+autoplay = true
+
 [node name="steering" type="Node2D" parent="ship_inside"]
 position = Vector2(549, 484)
 script = ExtResource("5_1ssrq")
 
 [node name="wheel" type="Sprite2D" parent="ship_inside/steering"]
-position = Vector2(300, 0)
+position = Vector2(-394, 3)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("5_n7ycc")
 
 [node name="lever" type="Node2D" parent="ship_inside/steering"]
 texture_filter = 1
-position = Vector2(500, 0)
+position = Vector2(400, 0)
 scale = Vector2(1.5, 1.5)
 
 [node name="lever_base" type="Sprite2D" parent="ship_inside/steering/lever"]
@@ -87,6 +95,11 @@ texture = ExtResource("7_n73ec")
 
 [node name="lever_handle" type="Sprite2D" parent="ship_inside/steering/lever"]
 texture = ExtResource("8_5fneg")
+
+[node name="water_sounds" type="AudioStreamPlayer" parent="ship_inside"]
+stream = ExtResource("10_44kj0")
+volume_db = -10.0
+autoplay = true
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(320, 320)
@@ -118,6 +131,7 @@ debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 
 [node name="ground" type="CSGBox3D" parent="environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30327, -17.5797, -1.6549)
+visible = false
 size = Vector3(197.866, 0.203186, 449.211)
 material = SubResource("StandardMaterial3D_6m3fw")
 
@@ -141,6 +155,3 @@ use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
