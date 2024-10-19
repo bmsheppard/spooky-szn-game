@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://by2e3hw7amix0"]
 
 [ext_resource type="Texture2D" uid="uid://blrju3yt0syfc" path="res://assets/sonar_hit.png" id="1_2mdyi"]
-[ext_resource type="Script" path="res://sonar_hit.gd" id="1_ix0rc"]
+[ext_resource type="Script" path="res://scripts/sonar_hit.gd" id="1_ix0rc"]
 
 [node name="sonar_hit" type="Node2D"]
 script = ExtResource("1_ix0rc")

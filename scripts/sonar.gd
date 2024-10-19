@@ -1,13 +1,12 @@
 extends Node2D
 
-@onready var ship = $"../../SubViewport/ship"
-
+@onready var ship = $"../../../ship"
+@onready var sonar_shape_3d = $"../../../ship/sonar_shape_3d"
 @onready var sonar_base = $sonar_base
 @onready var sonar_line: Sprite2D = $sonar_line
-@onready var sonar_shape_3d = $"../../SubViewport/ship/sonar_shape_3d"
 @onready var sonar_sound = $sonar_sound
 
-const SONAR_HIT = preload("res://sonar_hit.tscn")
+const SONAR_HIT = preload("res://scenes/sonar_hit.tscn")
 
 const MAX_DISTANCE_3D = 200.
 const MAX_DISTANCE_2D = 122. # figure this out

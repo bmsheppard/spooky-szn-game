@@ -1,6 +1,5 @@
 extends Node2D
-
-@onready var ship = $"../../SubViewport/ship"
+@onready var ship = $"../../../ship"
 @onready var wheel = $wheel
 @onready var lever_handle = $lever/lever_handle
 
