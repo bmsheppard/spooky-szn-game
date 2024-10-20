@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=19 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
 [ext_resource type="Texture2D" uid="uid://enk1p7nocyb1" path="res://assets/wheel.png" id="2_kiwbm"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b6w2b6yvqhom5" path="res://assets/329915__carmsie__underwater-sounds-loopable.wav" id="10_2vmpd"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="11_c171r"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="12_j8tik"]
+[ext_resource type="PackedScene" uid="uid://d3iiio81ctyum" path="res://scenes/safezone.tscn" id="13_fid2q"]
 
 [sub_resource type="Environment" id="Environment_s2tm8"]
 fog_enabled = true
@@ -32,6 +33,8 @@ shader_parameter/edge_y = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
 size = Vector3(0, 10000, 0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_478a3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
 
@@ -85,9 +88,8 @@ texture = ExtResource("7_0l3lk")
 
 [node name="sonar_sound" type="AudioStreamPlayer" parent="temp_gui/gui/sonar"]
 stream = ExtResource("8_mm24d")
-volume_db = -8.0
+volume_db = -20.0
 pitch_scale = 0.8
-autoplay = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_s2tm8")
@@ -109,12 +111,8 @@ volume_db = -10.0
 autoplay = true
 
 [node name="ship" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -10.8843)
 script = ExtResource("11_c171r")
-
-[node name="body" type="CSGBox3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041, -0.121877)
-size = Vector3(0.513245, 0.330933, 0.447754)
 
 [node name="camera" type="Camera3D" parent="ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
@@ -126,6 +124,35 @@ shape = SubResource("BoxShape3D_gebbv")
 target_position = Vector3(0, 0, -200)
 debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 
+[node name="temp_shape" type="CSGBox3D" parent="ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -0.12)
+size = Vector3(0.5, 0.33, 0.45)
+
+[node name="Area3D" type="Area3D" parent="ship"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ship/Area3D"]
+shape = SubResource("BoxShape3D_478a3")
+
+[node name="start_minigame_text" type="RichTextLabel" parent="ship"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -23.0
+offset_right = 499.5
+offset_bottom = 477.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 40
+text = "Press Spacebar
+To search for note"
+fit_content = true
+
 [node name="environment" type="Node3D" parent="."]
 
 [node name="ground" type="CSGBox3D" parent="environment"]
@@ -135,14 +162,14 @@ size = Vector3(197.866, 0.203186, 449.211)
 material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="cube2" type="CSGBox3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5443, 14.2364, -57.7692)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.3825, 14.2364, -57.7692)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="cube3" type="CSGBox3D" parent="environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 51.3578, 14.2364, -104.421)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.8164, 14.2364, -60.8204)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
@@ -154,3 +181,11 @@ use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
+
+[node name="safezones" type="Node" parent="."]
+
+[node name="safezone" parent="safezones" instance=ExtResource("13_fid2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -76.3624)
+
+[connection signal="area_entered" from="ship/Area3D" to="ship" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="ship/Area3D" to="ship" method="_on_area_3d_area_exited"]

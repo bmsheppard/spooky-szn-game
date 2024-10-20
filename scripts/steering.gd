@@ -10,7 +10,7 @@ const MAX_RISE = 35.
 const RISE_RATE = 0.1
 
 
-func _input(event):
+func _input(_event):
 	if Input.is_key_pressed(KEY_A):
 		wheel.rotate(-0.01)
 		wheel.rotation = clamp(wheel.rotation, -1*MAX_TURN, MAX_TURN)
