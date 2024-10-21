@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var hook = $"../claw/hook"
 @onready var collision_shape_2d = $"../claw/hook/CollisionShape2D"
+@onready var temp_gui = $"../temp_gui"
 
 var attached = false
 
@@ -14,4 +15,5 @@ func _process(delta):
 		global_position = hook.global_position + Vector2.DOWN * collision_shape_2d.shape.size.y
 
 func _on_area_entered(area):
+	temp_gui.visible = true
 	attached = true

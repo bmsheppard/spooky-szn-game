@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://0myx3sqgvcdf"]
+[gd_scene load_steps=11 format=3 uid="uid://0myx3sqgvcdf"]
 
 [ext_resource type="Script" path="res://scripts/claw.gd" id="1_yn7p7"]
 [ext_resource type="Texture2D" uid="uid://ctoivwujc8pvl" path="res://icon.svg" id="2_mftpt"]
@@ -13,6 +13,9 @@
 size = Vector2(443, 212)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gob24"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_amxkl"]
+font_size = 35
 
 [node name="pickup_minigame" type="Node2D"]
 z_index = 20
@@ -62,10 +65,26 @@ script = ExtResource("5_unqix")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="target_area"]
 shape = SubResource("RectangleShape2D_gob24")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="temp_gui" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+[node name="pull_strength" type="Node2D" parent="temp_gui"]
 script = ExtResource("6_g2uw5")
+
+[node name="instructions" type="Label" parent="temp_gui"]
+custom_minimum_size = Vector2(0, 100)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.5
+offset_right = 119.5
+offset_bottom = 100.0
+grow_horizontal = 2
+text = "Press Space to pull aboard"
+label_settings = SubResource("LabelSettings_amxkl")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
 
 [connection signal="area_entered" from="treasure" to="treasure" method="_on_area_entered"]
 [connection signal="area_entered" from="target_area" to="target_area" method="_on_area_entered"]

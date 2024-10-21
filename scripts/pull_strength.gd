@@ -2,8 +2,14 @@ extends Node2D
 
 var size = 10
 const MAX_SIZE = 100
-const PERFECT_PULL = MAX_SIZE - 30
+const PERFECT_PULL = MAX_SIZE - 20
 
+func _process(delta):
+	size += delta * 200
+	if size >= MAX_SIZE:
+		size = 0
+	queue_redraw()
+	
 func _draw():
 	var viewport = get_viewport_rect().size
 	var bg_color: Color = Color.html("#0b1b7d")
@@ -14,3 +20,6 @@ func _draw():
 		draw_circle(pos, size, Color.GREEN)
 	else:
 		draw_circle(pos, size, Color.RED)
+
+func set_size(new_size):
+	size = new_size

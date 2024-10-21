@@ -26,3 +26,5 @@ func _process(_delta):
 func _input(event):
 	if event is InputEventMouseMotion and periscope_active:
 		SignalBus.set_periscope_angle.emit(event.relative.x)
+	if event.is_action_pressed("pull_treasure"):
+		SignalBus.reel_pull.emit()
