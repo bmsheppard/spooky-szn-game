@@ -30,4 +30,9 @@ func _handle_reel_pull():
 		
 		if instructions.visible:
 			instructions.visible = false
-		
+
+# leaving this in so that we can test this scene directly
+func _input(event):
+	if event.is_action_pressed("pull_treasure"):
+		_handle_reel_pull()
+	
