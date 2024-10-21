@@ -4,7 +4,7 @@ extends Camera3D
 const LOOK_SPEED = 0.001
 const FOV  = 0.75
 
-func _process(delta):
+func _process(_delta):
 	rotation.y = clamp(rotation.y, -FOV, FOV)
 
 func _input(event):		

@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var sonar_base = $sonar_base
 @onready var sonar_line: Sprite2D = $sonar_line
-@onready var sonar_sound = $sonar_sound
 var ship
 var ship_sonar_3d
 
@@ -19,10 +18,6 @@ func _ready():
 func _process(_delta):
 	sonar_line.rotate(0.01)
 	ship_sonar_3d.rotate(Vector3.DOWN, 0.01)
-	
-	#if int(sonar_line.rotation_degrees)%360 < 2:
-		#sonar_sound.play()
-	
 	
 	for n in ship_sonar_3d.get_collision_count():
 		var distance = ship.global_position.distance_to(ship_sonar_3d.get_collision_point(n))

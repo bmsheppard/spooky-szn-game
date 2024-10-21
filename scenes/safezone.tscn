@@ -1,12 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3iiio81ctyum"]
+[gd_scene load_steps=6 format=3 uid="uid://d3iiio81ctyum"]
+
+[ext_resource type="Script" path="res://scripts/safezone.gd" id="1_2expl"]
+[ext_resource type="Shader" uid="uid://b4fa1n8k5yd75" path="res://shaders/safezone.tres" id="1_b6rdr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jy6nf"]
+radius = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lpi0k"]
+render_priority = 0
+shader = ExtResource("1_b6rdr")
+shader_parameter/speed = 0.1
+shader_parameter/color = Color(1, 1, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_tu425"]
+lightmap_size_hint = Vector2i(1572, 787)
+material = SubResource("ShaderMaterial_lpi0k")
+radius = 50.0
+height = 100.0
 
 [node name="safezone" type="Node3D"]
 
 [node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("1_2expl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_jy6nf")
@@ -14,3 +29,6 @@ shape = SubResource("SphereShape3D_jy6nf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 mesh = SubResource("SphereMesh_tu425")
 skeleton = NodePath("../CollisionShape3D")
+
+[connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]
+[connection signal="area_exited" from="Area3D" to="Area3D" method="_on_area_exited"]
