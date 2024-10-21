@@ -4,9 +4,11 @@ extends Camera3D
 const LOOK_SPEED = 0.001
 const FOV  = 0.75
 
+func _ready():
+	SignalBus.set_periscope_angle.connect(_set_periscope_angle)
+	
 func _process(_delta):
 	rotation.y = clamp(rotation.y, -FOV, FOV)
 
-func _input(event):		
-	if event is InputEventMouseMotion:
-		rotate_object_local(Vector3.UP, event.relative.x * -LOOK_SPEED)
+func _set_periscope_angle(rot):
+	rotate_object_local(Vector3.UP, rot * - LOOK_SPEED)

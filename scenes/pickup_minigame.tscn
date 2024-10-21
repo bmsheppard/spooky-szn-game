@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://0myx3sqgvcdf"]
+[gd_scene load_steps=10 format=3 uid="uid://0myx3sqgvcdf"]
 
 [ext_resource type="Script" path="res://scripts/claw.gd" id="1_yn7p7"]
 [ext_resource type="Texture2D" uid="uid://ctoivwujc8pvl" path="res://icon.svg" id="2_mftpt"]
 [ext_resource type="Script" path="res://scripts/treasure.gd" id="3_8r7vf"]
 [ext_resource type="Texture2D" uid="uid://d2ifels0yvm8s" path="res://assets/temp_box.png" id="4_t1pei"]
 [ext_resource type="Script" path="res://scripts/target_area.gd" id="5_unqix"]
+[ext_resource type="Script" path="res://scripts/pull_strength.gd" id="6_g2uw5"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_uhhaf"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjpiu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8080h"]
 size = Vector2(443, 212)
@@ -36,8 +37,9 @@ texture = ExtResource("2_mftpt")
 [node name="hook" type="Area2D" parent="claw"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="claw/hook"]
+position = Vector2(0, -38.5)
 scale = Vector2(8, 8)
-shape = SubResource("CircleShape2D_uhhaf")
+shape = SubResource("RectangleShape2D_gjpiu")
 
 [node name="Sprite2D" type="Sprite2D" parent="claw/hook"]
 position = Vector2(0, -705)
@@ -59,6 +61,11 @@ script = ExtResource("5_unqix")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="target_area"]
 shape = SubResource("RectangleShape2D_gob24")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]
+script = ExtResource("6_g2uw5")
 
 [connection signal="area_entered" from="treasure" to="treasure" method="_on_area_entered"]
 [connection signal="area_entered" from="target_area" to="target_area" method="_on_area_entered"]

@@ -1,25 +1,34 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=27 format=3 uid="uid://b3q8pvsu5brxa"]
 
+[ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
+[ext_resource type="Texture2D" uid="uid://vg5oe1buf3lr" path="res://assets/sonar_room.png" id="1_pe883"]
 [ext_resource type="Texture2D" uid="uid://enk1p7nocyb1" path="res://assets/wheel.png" id="2_kiwbm"]
 [ext_resource type="Texture2D" uid="uid://cdv8hus40e320" path="res://assets/lever_base.png" id="3_338xf"]
 [ext_resource type="Texture2D" uid="uid://bp5y1fnt3bivp" path="res://assets/lever_handle.png" id="4_h6w8v"]
 [ext_resource type="Script" path="res://scripts/sonar.gd" id="5_xh8vp"]
 [ext_resource type="Texture2D" uid="uid://miqqswk3tst6" path="res://assets/sonar.png" id="6_504a5"]
+[ext_resource type="Texture2D" uid="uid://c5wlodpggqvl" path="res://assets/steering_room.png" id="6_or61o"]
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="7_0l3lk"]
 [ext_resource type="AudioStream" uid="uid://dm3wxlkw3q04o" path="res://assets/620321__marb7e__sonar-ping-sine-wave.wav" id="8_mm24d"]
 [ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="9_s36rb"]
 [ext_resource type="AudioStream" uid="uid://b6w2b6yvqhom5" path="res://assets/329915__carmsie__underwater-sounds-loopable.wav" id="10_2vmpd"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="11_c171r"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="12_j8tik"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="13_576ip"]
 [ext_resource type="PackedScene" uid="uid://d3iiio81ctyum" path="res://scenes/safezone.tscn" id="13_fid2q"]
 
-[sub_resource type="Environment" id="Environment_s2tm8"]
-fog_enabled = true
-fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
-fog_depth_begin = 0.0
-volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
-volumetric_fog_temporal_reprojection_enabled = false
+[sub_resource type="CircleShape2D" id="CircleShape2D_ulb4i"]
+radius = 477.744
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gaewg"]
+size = Vector2(63.9521, 95.9461)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2vffn"]
+viewport_path = NodePath("3d_world/ship_viewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
+size = Vector3(0, 10000, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkt4"]
 shader = ExtResource("9_s36rb")
@@ -31,70 +40,116 @@ shader_parameter/vignette_level = 0.37
 shader_parameter/edge_x = 1.0
 shader_parameter/edge_y = 1.0
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
-size = Vector3(0, 10000, 0)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_478a3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
 
-[node name="periscope" type="Node3D"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_d8mt6"]
+radius = 10.8895
 
-[node name="temp_gui" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
+[sub_resource type="Environment" id="Environment_s2tm8"]
+fog_enabled = true
+fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
+fog_depth_begin = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
+volumetric_fog_temporal_reprojection_enabled = false
 
-[node name="gui" type="HBoxContainer" parent="temp_gui"]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="root" type="Node2D"]
+script = ExtResource("1_688lp")
 
-[node name="steering" type="Node2D" parent="temp_gui/gui"]
-position = Vector2(0, -110)
-script = ExtResource("1_n7vwt")
+[node name="sonar_room" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_pe883")
 
-[node name="wheel" type="Sprite2D" parent="temp_gui/gui/steering"]
-position = Vector2(-394, 3)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_kiwbm")
-
-[node name="lever" type="Node2D" parent="temp_gui/gui/steering"]
-texture_filter = 1
-position = Vector2(400, 0)
-scale = Vector2(1.5, 1.5)
-
-[node name="lever_base" type="Sprite2D" parent="temp_gui/gui/steering/lever"]
-texture = ExtResource("3_338xf")
-
-[node name="lever_handle" type="Sprite2D" parent="temp_gui/gui/steering/lever"]
-texture = ExtResource("4_h6w8v")
-
-[node name="sonar" type="Node2D" parent="temp_gui/gui"]
+[node name="sonar" type="Node2D" parent="sonar_room"]
 z_as_relative = false
-position = Vector2(0, -120)
-scale = Vector2(2, 0.8)
+position = Vector2(-1, -44)
+scale = Vector2(3.005, 2.245)
 script = ExtResource("5_xh8vp")
 
-[node name="sonar_base" type="Sprite2D" parent="temp_gui/gui/sonar"]
+[node name="sonar_base" type="Sprite2D" parent="sonar_room/sonar"]
 texture_filter = 1
 texture = ExtResource("6_504a5")
 
-[node name="sonar_line" type="Sprite2D" parent="temp_gui/gui/sonar"]
+[node name="sonar_line" type="Sprite2D" parent="sonar_room/sonar"]
 texture_filter = 1
 texture = ExtResource("7_0l3lk")
 
-[node name="sonar_sound" type="AudioStreamPlayer" parent="temp_gui/gui/sonar"]
+[node name="sonar_sound" type="AudioStreamPlayer" parent="sonar_room/sonar"]
 stream = ExtResource("8_mm24d")
 volume_db = -20.0
 pitch_scale = 0.8
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_s2tm8")
+[node name="steering_room" type="Sprite2D" parent="."]
+position = Vector2(-960, 540)
+texture = ExtResource("6_or61o")
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="steering" type="Node2D" parent="steering_room"]
+position = Vector2(169, -128)
+script = ExtResource("1_n7vwt")
+
+[node name="wheel" type="Sprite2D" parent="steering_room/steering"]
+position = Vector2(-394, 3)
+scale = Vector2(0.87, 0.87)
+texture = ExtResource("2_kiwbm")
+
+[node name="wheel_area" type="Area2D" parent="steering_room/steering/wheel"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="steering_room/steering/wheel/wheel_area"]
+shape = SubResource("CircleShape2D_ulb4i")
+
+[node name="lever" type="Node2D" parent="steering_room/steering"]
+texture_filter = 1
+position = Vector2(336, 193)
+scale = Vector2(4.175, 4.175)
+skew = -0.113446
+
+[node name="lever_base" type="Sprite2D" parent="steering_room/steering/lever"]
+texture = ExtResource("3_338xf")
+
+[node name="lever_handle" type="Sprite2D" parent="steering_room/steering/lever"]
+texture = ExtResource("4_h6w8v")
+
+[node name="lever_area" type="Area2D" parent="steering_room/steering/lever"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="steering_room/steering/lever/lever_area"]
+position = Vector2(0.0414734, 1.52588e-05)
+shape = SubResource("RectangleShape2D_gaewg")
+
+[node name="periscope_room" type="Sprite2D" parent="."]
+position = Vector2(960, -540)
+texture = SubResource("ViewportTexture_2vffn")
+
+[node name="3d_world" type="Node3D" parent="."]
+
+[node name="ship_viewport" type="SubViewport" parent="3d_world"]
+size = Vector2i(1920, 1080)
+
+[node name="ship" type="Node3D" parent="3d_world/ship_viewport" groups=["ship"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
+script = ExtResource("11_c171r")
+
+[node name="body" type="CSGBox3D" parent="3d_world/ship_viewport/ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041, -0.121877)
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+size = Vector3(0.513245, 0.330933, 0.447754)
+
+[node name="sonar_shape_3d" type="ShapeCast3D" parent="3d_world/ship_viewport/ship" groups=["ship_sonar_3d"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
+shape = SubResource("BoxShape3D_gebbv")
+target_position = Vector3(0, 0, -200)
+debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
+
+[node name="camera" type="Camera3D" parent="3d_world/ship_viewport/ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
+current = true
+script = ExtResource("12_j8tik")
+
+[node name="ColorRect2" type="ColorRect" parent="3d_world/ship_viewport/ship"]
 z_index = -1
 material = SubResource("ShaderMaterial_fmkt4")
 anchors_preset = 15
@@ -103,37 +158,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="sounds" type="Node" parent="."]
-
-[node name="water_sounds" type="AudioStreamPlayer" parent="sounds"]
-stream = ExtResource("10_2vmpd")
-volume_db = -10.0
-autoplay = true
-
-[node name="ship" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -10.8843)
-script = ExtResource("11_c171r")
-
-[node name="camera" type="Camera3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
-script = ExtResource("12_j8tik")
-
-[node name="sonar_shape_3d" type="ShapeCast3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
-shape = SubResource("BoxShape3D_gebbv")
-target_position = Vector3(0, 0, -200)
-debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
-
-[node name="temp_shape" type="CSGBox3D" parent="ship"]
+[node name="temp_shape" type="CSGBox3D" parent="3d_world/ship_viewport/ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -0.12)
 size = Vector3(0.5, 0.33, 0.45)
 
-[node name="Area3D" type="Area3D" parent="ship"]
+[node name="Area3D" type="Area3D" parent="3d_world/ship_viewport/ship"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ship/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/ship_viewport/ship/Area3D"]
 shape = SubResource("BoxShape3D_478a3")
 
-[node name="start_minigame_text" type="RichTextLabel" parent="ship"]
+[node name="start_minigame_text" type="RichTextLabel" parent="3d_world/ship_viewport/ship"]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -153,39 +187,65 @@ text = "Press Spacebar
 To search for note"
 fit_content = true
 
-[node name="environment" type="Node3D" parent="."]
+[node name="environment" type="Node3D" parent="3d_world"]
 
-[node name="ground" type="CSGBox3D" parent="environment"]
+[node name="ground" type="CSGBox3D" parent="3d_world/environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30327, -17.5797, -1.6549)
 visible = false
 size = Vector3(197.866, 0.203186, 449.211)
 material = SubResource("StandardMaterial3D_6m3fw")
 
-[node name="cube2" type="CSGBox3D" parent="environment"]
+[node name="cube2" type="CSGBox3D" parent="3d_world/environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.3825, 14.2364, -57.7692)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
-[node name="cube3" type="CSGBox3D" parent="environment"]
+[node name="cube3" type="CSGBox3D" parent="3d_world/environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.8164, 14.2364, -60.8204)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
-[node name="cube4" type="CSGBox3D" parent="environment"]
+[node name="cube4" type="CSGBox3D" parent="3d_world/environment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.88383, 14.2364, -194.983)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
+[node name="enemy" type="Node3D" parent="3d_world"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.92859)
+script = ExtResource("13_576ip")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="3d_world/enemy"]
+
+[node name="Area3D" type="Area3D" parent="3d_world/enemy"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/enemy/Area3D"]
+shape = SubResource("SphereShape3D_d8mt6")
+
+[node name="fog" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s2tm8")
+
 [node name="safezones" type="Node" parent="."]
 
 [node name="safezone" parent="safezones" instance=ExtResource("13_fid2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -76.3624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -92.4852)
 
-[connection signal="area_entered" from="ship/Area3D" to="ship" method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="ship/Area3D" to="ship" method="_on_area_3d_area_exited"]
+[node name="sounds" type="Node" parent="."]
+
+[node name="water_sounds" type="AudioStreamPlayer" parent="sounds"]
+stream = ExtResource("10_2vmpd")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="input_event" from="steering_room/steering/wheel/wheel_area" to="steering_room/steering" method="_on_wheel_area_input_event"]
+[connection signal="input_event" from="steering_room/steering/lever/lever_area" to="steering_room/steering" method="_on_lever_area_input_event"]
+[connection signal="area_entered" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_exited"]
+[connection signal="area_entered" from="3d_world/enemy/Area3D" to="3d_world/enemy" method="_on_area_3d_area_entered"]
