@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0myx3sqgvcdf"]
+[gd_scene load_steps=17 format=3 uid="uid://cidi8v8tqi0gg"]
 
 [ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="1_xo8ad"]
 [ext_resource type="Script" path="res://scripts/claw.gd" id="1_yn7p7"]

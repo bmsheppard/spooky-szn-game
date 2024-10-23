@@ -14,9 +14,14 @@ var start_depth = 200
 var start_long_lad = Vector2(200,200)
 var start_global_position
 
+var health = 2.0
+
 func _ready():
 	minigame_text.visible = false
 	SignalBus.restart_main_game.connect(restart_main_game)
+	SignalBus.hit_ship.connect(hit_ship)
+	SignalBus.in_safe_zone.connect(in_safe_zone)
+	SignalBus.out_safe_zone.connect(out_safe_zone)
 	start_global_position = global_position
 	
 func _process(_delta):
@@ -38,12 +43,18 @@ func start_minigame():
 
 func restart_main_game():
 	speed = 0.05
+	
+func hit_ship():
+	health -= 1.0
+	SignalBus.shake_screen.emit()
+	if health <= 0:
+		SignalBus.lose_game.emit()
 
 
-func _on_area_3d_area_entered(_area):
+func in_safe_zone():
 	minigame_text.visible = true
 
-func _on_area_3d_area_exited(_area):
+func out_safe_zone():
 	minigame_text.visible = false
 	
 
