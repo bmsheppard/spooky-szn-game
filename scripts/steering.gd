@@ -8,7 +8,7 @@ const MAX_TURN = 0.5
 const TURN_RATE = 0.01
 
 const MAX_RISE = 35.
-const RISE_RATE = 0.1
+const RISE_RATE = 0.2
 
 var wheel_selected = false
 var lever_selected = false

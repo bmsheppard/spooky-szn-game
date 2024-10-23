@@ -25,8 +25,8 @@ void fragment() {
 	vec3 vision_color = base_color;
 	color = dot(color, luminance) * vision_color;
 	COLOR = vec4(color * brightness, 0.4);
-	
-	
+
+
     // make the pixel completely transparent
     // if it's outside the radius of the circle
     //COLOR.a = 1.0 - round(distance(UV, vec2(0.5, 0.5)));
