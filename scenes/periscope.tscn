@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=80 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cqmr3ori6stjd" path="res://scenes/enemy.tscn" id="20_15dcv"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="21_2h66y"]
 [ext_resource type="Shader" path="res://shaders/skew.gdshader" id="23_5l4a7"]
+[ext_resource type="Script" path="res://scripts/depth_indicators.gd" id="28_2awn4"]
 
 [sub_resource type="GDScript" id="GDScript_6yqff"]
 script/source = "extends Sprite2D
@@ -157,7 +158,7 @@ fill_to = Vector2(0.636752, 0.769231)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vagu1"]
 gradient = SubResource("Gradient_rfh5e")
-fill_from = Vector2(0, 0.461538)
+fill_from = Vector2(0, 0.423077)
 fill_to = Vector2(0, 0.970085)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2chvn"]
@@ -189,17 +190,21 @@ background_mode = 1
 background_color = Color(0.28485, 0.28485, 0.28485, 1)
 glow_normalized = true
 glow_intensity = 5.02
-fog_light_energy = 6.3
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 1.76
+fog_density = 1.0
 fog_depth_begin = 0.0
-volumetric_fog_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
-size = Vector3(0, 10000, 0)
+size = Vector3(0, 400, 0)
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_lyc0i"]
 dof_blur_far_enabled = true
-dof_blur_far_distance = 500.0
-dof_blur_amount = 0.4
+dof_blur_far_distance = 100.0
+dof_blur_far_transition = 115.72
+dof_blur_amount = 0.13
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkt4"]
 shader = ExtResource("9_s36rb")
@@ -574,10 +579,10 @@ shape = SubResource("RectangleShape2D_46u4v")
 environment = SubResource("Environment_s2tm8")
 
 [node name="ship_viewport" type="SubViewport" parent="3d_world"]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="ship" type="CharacterBody3D" parent="3d_world/ship_viewport" groups=["ship"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -50, 0, -300)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("11_c171r")
@@ -606,9 +611,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpotLight3D" type="SpotLight3D" parent="3d_world/ship_viewport/ship"]
-visible = false
-
 [node name="start_minigame_text" type="RichTextLabel" parent="3d_world/ship_viewport/ship"]
 visible = false
 anchors_preset = 8
@@ -635,6 +637,9 @@ shape = SubResource("BoxShape3D_478a3")
 
 [node name="enemies" type="Node3D" parent="3d_world"]
 
+[node name="enemy6" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -645.726, 0, 1.409)
+
 [node name="enemy" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -249.726, 0, -267.591)
 
@@ -645,7 +650,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -452.726, 0, -436.591)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -451.726, 53, -228.591)
 
 [node name="enemy4" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -301.726, -135, -438.591)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.726, -51, -324.591)
+
+[node name="enemy5" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -761.726, 0, -254.591)
+
+[node name="enemy7" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, 0, -102.591)
+
+[node name="enemy8" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -821.726, 0, 248.409)
+
+[node name="enemy9" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1009.73, -215, -102.591)
+
+[node name="enemy10" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, -28, 128.409)
+
+[node name="enemy11" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1044.73, 0, -369.591)
 
 [node name="safezones" type="Node" parent="."]
 
@@ -741,6 +764,59 @@ text = "Safe Zone
 -500 °N 300 °W"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="depth_indicators" type="Node2D" parent="UI"]
+script = ExtResource("28_2awn4")
+
+[node name="bar1" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1116.0
+offset_top = 485.0
+offset_right = 1152.0
+offset_bottom = 494.0
+rotation = 0.0174533
+color = Color(0, 0, 0, 1)
+
+[node name="bar2" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1117.0
+offset_top = 458.0
+offset_right = 1153.0
+offset_bottom = 468.0
+color = Color(0, 0, 0, 1)
+
+[node name="bar3" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1118.0
+offset_top = 431.0
+offset_right = 1155.0
+offset_bottom = 441.0
+color = Color(0, 0, 0, 1)
+
+[node name="bar4" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1118.0
+offset_top = 404.0
+offset_right = 1156.0
+offset_bottom = 414.0
+color = Color(0, 0, 0, 1)
+
+[node name="bar5" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1121.0
+offset_top = 376.0
+offset_right = 1157.0
+offset_bottom = 386.0
+color = Color(0, 0, 0, 1)
+
+[node name="bar6" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1123.0
+offset_top = 349.0
+offset_right = 1159.0
+offset_bottom = 358.0
+color = Color(0, 0, 0, 1)
+
+[node name="bar7" type="ColorRect" parent="UI/depth_indicators"]
+offset_left = 1124.0
+offset_top = 321.0
+offset_right = 1160.0
+offset_bottom = 330.0
+color = Color(0, 0, 0, 1)
 
 [connection signal="timeout" from="sonar_room/lighting/background_1_timer" to="sonar_room/lighting" method="_on_background_1_timer_timeout"]
 [connection signal="timeout" from="sonar_room/lighting/background_2_timer" to="sonar_room/lighting" method="_on_background_2_timer_timeout"]

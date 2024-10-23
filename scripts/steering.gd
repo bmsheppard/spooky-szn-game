@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var wheel = $wheel
 @onready var lever_handle = $lever/lever_handle
+@onready var depth_indicators = $"../../UI/depth_indicators"
+
 var ship: Node3D
 
 const MAX_TURN = 0.5
@@ -10,9 +12,12 @@ const TURN_RATE = 0.002
 const MAX_RISE = 35.
 const RISE_RATE = 0.2
 const MAX_ELAVATION = 100.
+const ELEVATION_UPDATE_INTERVAL = 1 # seconds
 
+var last_elevation_update = 0
 var wheel_selected = false
 var lever_selected = false
+
 
 func _ready():
 	ship = get_tree().get_first_node_in_group('ship')
@@ -47,6 +52,11 @@ func _process(delta):
 	ship.rotate_y((wheel.rotation / MAX_TURN) * TURN_RATE * -1)
 	ship.position.y +=  (lever_handle.position.y / MAX_RISE) * RISE_RATE * -1
 	ship.position.y = clamp(ship.position.y, -1 * MAX_ELAVATION, MAX_ELAVATION)
+	
+	last_elevation_update += delta
+	if last_elevation_update >= ELEVATION_UPDATE_INTERVAL:
+		last_elevation_update = 0
+		depth_indicators.update_indicators(ship.position.y, -MAX_ELAVATION, MAX_ELAVATION)
 
 func _on_wheel_area_input_event(viewport, event, shape_idx):
 	if Input.is_action_just_pressed("left_click"):

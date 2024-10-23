@@ -4,6 +4,7 @@ extends Node2D
 @onready var move_icon_down = $periscope_room/move_down/move_icon
 @onready var periscope = $sonar_room/periscope
 @onready var periscope_area_2d = $sonar_room/periscope/Area2D
+@onready var area_2d = $periscope_room/move_down/Area2D
 
 @onready var blur = $UI/blur
 var periscope_active = false
@@ -37,19 +38,14 @@ func _ready():
 	offset = ((screen_size * offset_scale) - screen_size) / 2
 	safe_zone_label.text = str('Safe Zone\n',int(current_safe_zone.x),'° N ', int(current_safe_zone.y), '° W')
 	SignalBus.restart_main_game.connect(next_safe_zone)
+	SignalBus.start_minigame.connect(start_minigame)
 	#SignalBus.shake_screen.connect(apply_shake)
 
+func start_minigame():
+	area_2d.visible = false
+	
 		
 func _process(delta):
-	if Input.is_action_just_pressed("escape"):
-		get_tree().quit()
-	
-	#if shake_strength > 0:
-		#print('hello world')
-		#shake_strength = lerpf(shake_strength, 0, shakeFade * delta)
-		#offset = randomOffset()
-		#position += offset
-		
 	if Input.is_action_just_pressed("left_click") and (move_icon_right.visible or move_icon_left.visible) and screen_positon.y == 0:
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_BOUNCE)
 		if screen_positon.x == 0:
@@ -66,10 +62,12 @@ func _process(delta):
 		var tween = get_tree().create_tween().set_trans(Tween.TRANS_BOUNCE)
 		if screen_positon.y == 0:
 			periscope_area_2d.visible = false
+			SignalBus.periscope_active.emit(true)
 			periscope_active = true 
 			screen_positon.y = screen_size.y + (offset.y)
 		else:
 			periscope_area_2d.visible = true
+			SignalBus.periscope_active.emit(false)
 			periscope_active = false
 			screen_positon.y = 0
 		blur.visible = true
@@ -88,11 +86,14 @@ func _input(event):
 		SignalBus.reel_pull.emit()
 		
 func next_safe_zone():
+	area_2d.visible = true
 	if current_safe_zone == safe_zone_1:
 		current_safe_zone = safe_zone_2
 	elif current_safe_zone == safe_zone_2:
 		current_safe_zone = safe_zone_3
 	elif current_safe_zone == safe_zone_3:
-		pass #TODO WIN GAME!!
-	
+		get_tree().change_scene_to_file("res://scenes/win_screen.tscn")
 	safe_zone_label.text = str('Safe Zone\n',int(current_safe_zone.x),'° N ', int(current_safe_zone.y), '° W')
+
+func get_mouse_pos():
+	return get_viewport().get_mouse_position()

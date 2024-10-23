@@ -1,0 +1,99 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkgppinf7i126"]
+
+[ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_t6kxr"]
+[ext_resource type="AudioStream" uid="uid://c2twdtdiur1jd" path="res://assets/periscope.ogg" id="2_bouf0"]
+[ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="3_ngyg5"]
+[ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="4_smfdf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ckoua"]
+shader = ExtResource("3_ngyg5")
+shader_parameter/luminance = Color(0.505882, 0.27451, 0.0823529, 1)
+shader_parameter/base_color = Color(1, 0.119595, 0.414091, 1)
+shader_parameter/brightness = 2.0
+shader_parameter/noise_level = 0.8
+shader_parameter/vignette_level = 0.37
+shader_parameter/edge_x = 1.0
+shader_parameter/edge_y = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pk1tl"]
+font = ExtResource("4_smfdf")
+font_size = 80
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.956863)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="Theme" id="Theme_phh6e"]
+default_font = ExtResource("4_smfdf")
+default_font_size = 25
+
+[node name="lose_screen" type="Node2D"]
+script = ExtResource("1_t6kxr")
+
+[node name="Periscope" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_bouf0")
+pitch_scale = 0.8
+mix_target = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="gui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/gui"]
+z_index = -1
+material = SubResource("ShaderMaterial_ckoua")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Control" parent="CanvasLayer/gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="CanvasLayer/gui/title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -40.0
+offset_right = 196.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+text = " You DIED"
+label_settings = SubResource("LabelSettings_pk1tl")
+
+[node name="play_again" type="Button" parent="CanvasLayer/gui/title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = 30.0
+offset_right = 90.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_phh6e")
+text = "play again"
+
+[connection signal="pressed" from="CanvasLayer/gui/title/play_again" to="." method="_on_play_again_pressed"]
