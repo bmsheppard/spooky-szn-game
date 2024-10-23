@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=41 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="13_576ip"]
 [ext_resource type="PackedScene" uid="uid://d3iiio81ctyum" path="res://scenes/safezone.tscn" id="13_fid2q"]
 [ext_resource type="PackedScene" uid="uid://d073k3g4crehm" path="res://assets/SubB.fbx" id="14_p7vwf"]
+[ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="17_2d3hs"]
 
 [sub_resource type="Gradient" id="Gradient_ow8gd"]
 offsets = PackedFloat32Array(0, 0.012987, 1)
@@ -87,6 +88,10 @@ shader_parameter/edge_x = 1.0
 shader_parameter/edge_y = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_478a3"]
+
+[sub_resource type="Theme" id="Theme_x70uq"]
+default_font = ExtResource("17_2d3hs")
+default_font_size = 20
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
 
@@ -258,22 +263,23 @@ shape = SubResource("BoxShape3D_478a3")
 
 [node name="start_minigame_text" type="RichTextLabel" parent="3d_world/ship_viewport/ship"]
 visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -23.0
-offset_right = 499.5
-offset_bottom = 477.0
+clip_contents = false
+anchors_preset = -1
+anchor_left = 0.878
+anchor_top = 0.936
+anchor_right = 0.884
+anchor_bottom = 0.936
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -460.0
+offset_bottom = 780.0
 grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+theme = SubResource("Theme_x70uq")
 theme_override_font_sizes/normal_font_size = 40
-text = "Press Spacebar
-To search for note"
+bbcode_enabled = true
+text = "[center]Press Spacebar
+
+To search for note[/center]"
 fit_content = true
 
 [node name="environment" type="Node3D" parent="3d_world"]
@@ -323,7 +329,7 @@ shape = SubResource("SphereShape3D_nc1l5")
 [node name="safezones" type="Node" parent="."]
 
 [node name="safezone" parent="safezones" instance=ExtResource("13_fid2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -328, -76.3624)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65891, 11.6786, -64.6187)
 
 [node name="sounds" type="Node" parent="."]
 
@@ -336,4 +342,6 @@ autoplay = true
 [connection signal="timeout" from="sonar_room/lighting/background_2_timer" to="sonar_room/lighting" method="_on_background_2_timer_timeout"]
 [connection signal="input_event" from="steering_room/steering/wheel/wheel_area" to="steering_room/steering" method="_on_wheel_area_input_event"]
 [connection signal="input_event" from="steering_room/steering/lever/lever_area" to="steering_room/steering" method="_on_lever_area_input_event"]
+[connection signal="area_entered" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_exited"]
 [connection signal="body_entered" from="3d_world/enemy/Area3D" to="3d_world/enemy" method="_on_area_3d_body_entered"]

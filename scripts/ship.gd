@@ -6,6 +6,7 @@ var minigame = preload("res://scenes/pickup_minigame.tscn")
 var speed = 0.05
 
 func _ready():
+	minigame_text.visible = false
 	SignalBus.restart_main_game.connect(restart_main_game)
 	
 func _process(_delta):

@@ -4,7 +4,7 @@ extends Area2D
 
 func _ready():
 	var viewport = get_viewport_rect().size
-	collision.shape.size = Vector2(viewport[0], viewport[1] / 4)
+	collision.shape.size = Vector2(viewport.x, viewport.y / 8)
 	
 func _on_area_entered(_area):
 	if treasure.attached:

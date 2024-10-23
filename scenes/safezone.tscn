@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3iiio81ctyum"]
+[gd_scene load_steps=7 format=3 uid="uid://d3iiio81ctyum"]
 
 [ext_resource type="Script" path="res://scripts/safezone.gd" id="1_2expl"]
 [ext_resource type="Shader" uid="uid://dl3epcmdfmqoa" path="res://shaders/safezone.tres" id="1_b6rdr"]
+[ext_resource type="AudioStream" uid="uid://cxmsmfd1tnb6a" path="res://assets/periscope_nobeep.ogg" id="3_s4wp4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jy6nf"]
 radius = 50.0
@@ -29,6 +30,10 @@ shape = SubResource("SphereShape3D_jy6nf")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 mesh = SubResource("SphereMesh_tu425")
 skeleton = NodePath("../CollisionShape3D")
+
+[node name="Periscope" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_s4wp4")
+volume_db = -12.0
 
 [connection signal="area_entered" from="Area3D" to="Area3D" method="_on_area_entered"]
 [connection signal="area_exited" from="Area3D" to="Area3D" method="_on_area_exited"]

@@ -1,26 +1,49 @@
-[gd_scene load_steps=11 format=3 uid="uid://0myx3sqgvcdf"]
+[gd_scene load_steps=17 format=3 uid="uid://0myx3sqgvcdf"]
 
+[ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="1_xo8ad"]
 [ext_resource type="Script" path="res://scripts/claw.gd" id="1_yn7p7"]
-[ext_resource type="Texture2D" uid="uid://ctoivwujc8pvl" path="res://icon.svg" id="2_mftpt"]
+[ext_resource type="Texture2D" uid="uid://bgmnv26n6mw66" path="res://assets/MainPiece_Open.png" id="2_cbfci"]
+[ext_resource type="Texture2D" uid="uid://bn3em5ry6x38x" path="res://assets/ExtentionPiece.png" id="2_djkfh"]
 [ext_resource type="Script" path="res://scripts/treasure.gd" id="3_8r7vf"]
-[ext_resource type="Texture2D" uid="uid://d2ifels0yvm8s" path="res://assets/temp_box.png" id="4_t1pei"]
+[ext_resource type="Texture2D" uid="uid://gjqxvgkxh8iy" path="res://assets/Chest.png" id="4_b38ls"]
+[ext_resource type="Texture2D" uid="uid://vsimut16hxk6" path="res://assets/MainPiece_Closed_Empty.png" id="4_ylopc"]
 [ext_resource type="Script" path="res://scripts/target_area.gd" id="5_unqix"]
 [ext_resource type="Script" path="res://scripts/pull_strength.gd" id="6_g2uw5"]
+[ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="7_e1u26"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iescs"]
+shader = ExtResource("1_xo8ad")
+shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
+shader_parameter/base_color = Color(0.2, 1, 0.4, 1)
+shader_parameter/brightness = 2.0
+shader_parameter/noise_level = 0.2
+shader_parameter/vignette_level = 0.5
+shader_parameter/edge_x = 4.0
+shader_parameter/edge_y = 4.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjpiu"]
+size = Vector2(20, 8.375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8080h"]
-size = Vector2(443, 212)
+size = Vector2(249, 86)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gob24"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_amxkl"]
+font = ExtResource("7_e1u26")
 font_size = 35
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_ah6xi"]
+default_font = ExtResource("7_e1u26")
 
 [node name="pickup_minigame" type="Node2D"]
 z_index = 20
 
 [node name="background" type="ColorRect" parent="."]
+z_as_relative = false
+material = SubResource("ShaderMaterial_iescs")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,29 +57,42 @@ color = Color(0.0438382, 0.106176, 0.492154, 1)
 z_index = 5
 script = ExtResource("1_yn7p7")
 
-[node name="rope" type="Sprite2D" parent="claw"]
-texture = ExtResource("2_mftpt")
-
 [node name="hook" type="Area2D" parent="claw"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="claw/hook"]
-position = Vector2(0, -38.5)
+position = Vector2(0, -46.5)
 scale = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_gjpiu")
 
-[node name="Sprite2D" type="Sprite2D" parent="claw/hook"]
-position = Vector2(0, -705)
-scale = Vector2(0.5, 10)
-texture = ExtResource("2_mftpt")
+[node name="extender" type="Sprite2D" parent="claw/hook"]
+position = Vector2(0, -535)
+texture = ExtResource("2_djkfh")
+
+[node name="extender2" type="Sprite2D" parent="claw/hook"]
+position = Vector2(0, -880)
+texture = ExtResource("2_djkfh")
+
+[node name="extender3" type="Sprite2D" parent="claw/hook"]
+position = Vector2(0, -1224)
+texture = ExtResource("2_djkfh")
+
+[node name="open" type="Sprite2D" parent="claw/hook"]
+position = Vector2(0, -189)
+texture = ExtResource("2_cbfci")
+
+[node name="closed" type="Sprite2D" parent="claw/hook"]
+position = Vector2(0, -189)
+texture = ExtResource("4_ylopc")
 
 [node name="treasure" type="Area2D" parent="."]
 script = ExtResource("3_8r7vf")
 
 [node name="Sprite2D" type="Sprite2D" parent="treasure"]
-texture = ExtResource("4_t1pei")
+position = Vector2(0, -65)
+texture = ExtResource("4_b38ls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="treasure"]
-position = Vector2(-0.5, 0)
+position = Vector2(0, -45)
 shape = SubResource("RectangleShape2D_8080h")
 
 [node name="target_area" type="Area2D" parent="."]
@@ -87,8 +123,14 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="power" type="Label" parent="temp_gui"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -24.5
 offset_right = 124.0
-offset_bottom = 49.0
+offset_bottom = 24.5
+grow_vertical = 2
+theme = SubResource("Theme_ah6xi")
 text = "power"
 label_settings = SubResource("LabelSettings_amxkl")
 vertical_alignment = 1

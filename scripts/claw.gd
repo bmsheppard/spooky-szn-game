@@ -5,18 +5,28 @@ extends Node2D
 @onready var treasure = $"../treasure"
 @onready var pull_strength = $"../temp_gui/pull_strength"
 @onready var instructions = $"../temp_gui/instructions"
+@onready var open_sprite = $hook/open
+@onready var closed_sprite = $hook/closed
+
+const PULL_DIFFICULTY = 0.9 # lower percent -> harder
 
 func _ready():
+	closed_sprite.visible = true
+	open_sprite.visible = false
 	var center = get_viewport_rect().size / 2
-	position = Vector2(center.x, center.y)
+	position = Vector2(center.x, 0)
 	SignalBus.reel_pull.connect(_handle_reel_pull)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if treasure.attached:
-		position.y += 100*delta
+		if closed_sprite.visible:
+			closed_sprite.visible = false
+			open_sprite.visible = true
+		position.y += 40*delta
 	else:
-		position.y += 200*delta
+		position.y += 100*delta
 	position.y = clamp(
 		position.y, 
 		target_area.shape.size.y / 2, 
@@ -25,7 +35,7 @@ func _process(delta):
 
 func _handle_reel_pull():
 	if treasure.attached:
-		position.y -= 100 * (pull_strength.size/pull_strength.MAX_SIZE)
+		position.y -= 100 * (pull_strength.size/pull_strength.MAX_SIZE)**2 * PULL_DIFFICULTY
 		pull_strength.set_size(0)
 		
 		if instructions.visible:
