@@ -32,11 +32,12 @@ default_font_size = 25
 default_font = ExtResource("2_vju81")
 default_font_size = 20
 
-[node name="TitleScreen" type="Node2D"]
+[node name="title_screen" type="Node2D"]
 script = ExtResource("1_e1d10")
 
 [node name="Periscope" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_fy1ea")
+mix_target = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
