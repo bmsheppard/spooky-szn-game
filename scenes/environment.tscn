@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://drvyq0ryskyrw"]
+
+[ext_resource type="Script" path="res://scenes/environment.gd" id="1_5hb6i"]
+[ext_resource type="PackedScene" uid="uid://bm8k22itkwuf2" path="res://assets/Kelp1.glb" id="1_66tfl"]
+[ext_resource type="PackedScene" uid="uid://dk6738vvic035" path="res://assets/Kelp2.glb" id="2_8nlrt"]
+
+[node name="kelp" type="Node3D"]
+script = ExtResource("1_5hb6i")
+
+[node name="Kelp1" parent="." instance=ExtResource("1_66tfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.11151, 0)
+
+[node name="Kelp3" parent="." instance=ExtResource("1_66tfl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.38397, -2.96761, -2.3017)
+
+[node name="Kelp2" parent="." instance=ExtResource("2_8nlrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.05215, -1.57529, 4.96797)
+
+[node name="Kelp4" parent="." instance=ExtResource("2_8nlrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.540406, -1.22041, -4.99198)

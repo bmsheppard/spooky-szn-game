@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=84 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cqmr3ori6stjd" path="res://scenes/enemy.tscn" id="20_15dcv"]
 [ext_resource type="Shader" path="res://shaders/blur.gdshader" id="21_2h66y"]
 [ext_resource type="Shader" path="res://shaders/skew.gdshader" id="23_5l4a7"]
+[ext_resource type="PackedScene" uid="uid://drvyq0ryskyrw" path="res://scenes/environment.tscn" id="25_bnndb"]
 [ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="28_0bo06"]
 [ext_resource type="Script" path="res://scripts/depth_indicators.gd" id="28_2awn4"]
 
@@ -685,6 +686,101 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, -28, 128.409)
 
 [node name="enemy11" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1044.73, 0, -369.591)
+
+[node name="environment" type="Node3D" parent="3d_world"]
+
+[node name="kelp" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.20827, -0.586907, -32.3544)
+
+[node name="kelp2" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6541, -0.586907, -32.3544)
+
+[node name="kelp3" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.6541, -0.586907, -80.2293)
+
+[node name="kelp4" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -64.214, -0.586907, -80.2293)
+
+[node name="kelp5" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.1793, -0.586907, -124.485)
+
+[node name="kelp6" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3978, -0.586907, -231.717)
+
+[node name="kelp7" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133.042, -0.586907, -231.717)
+
+[node name="kelp8" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133.042, -0.586907, -365.298)
+
+[node name="kelp9" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -299.292, -0.586907, -365.298)
+
+[node name="kelp10" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -299.292, -0.586907, -516.893)
+
+[node name="kelp11" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -480.612, -0.586907, -516.893)
+
+[node name="kelp12" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -480.612, -0.586907, -292.46)
+
+[node name="kelp13" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -629.23, -0.586907, -292.46)
+
+[node name="kelp14" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -629.23, -0.586907, -474.571)
+
+[node name="kelp15" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -846.038, -0.586907, -474.571)
+
+[node name="kelp16" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -846.038, -0.586907, -205.961)
+
+[node name="kelp17" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -665.382, -0.586907, -205.961)
+
+[node name="kelp18" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -665.382, -0.586907, -40.625)
+
+[node name="kelp19" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -914.583, -0.586907, -40.625)
+
+[node name="kelp20" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -914.583, -0.586907, -159.768)
+
+[node name="kelp21" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -795.556, -0.586907, 155.628)
+
+[node name="kelp22" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1177.64, -0.586907, 155.628)
+
+[node name="kelp23" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1177.64, -0.586907, 22.1614)
+
+[node name="kelp24" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1689.87, -0.586907, 22.1614)
+
+[node name="kelp25" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1689.87, -0.586907, -251.251)
+
+[node name="kelp26" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1689.87, -0.586907, -417.306)
+
+[node name="kelp27" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1343.08, -0.586907, -417.306)
+
+[node name="kelp28" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1228.51, -0.586907, 209.316)
+
+[node name="kelp29" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1228.51, -0.586907, 376.204)
+
+[node name="kelp30" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -942.963, -0.586907, 376.204)
+
+[node name="kelp31" parent="3d_world/environment" instance=ExtResource("25_bnndb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -942.963, -0.586907, 376.204)
 
 [node name="safezones" type="Node" parent="."]
 
