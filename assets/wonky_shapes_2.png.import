@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2l03mury1c1c"
-path="res://.godot/imported/SteerCockpit_Textured.png-49437b0015c1e04f264382abcb2d93a6.ctex"
+uid="uid://bnfaa0qlpb00i"
+path="res://.godot/imported/wonky_shapes_2.png-8b9dc8cb76ec3e0647ef00fec141230f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/SteerCockpit_Textured.png"
-dest_files=["res://.godot/imported/SteerCockpit_Textured.png-49437b0015c1e04f264382abcb2d93a6.ctex"]
+source_file="res://assets/wonky_shapes_2.png"
+dest_files=["res://.godot/imported/wonky_shapes_2.png-8b9dc8cb76ec3e0647ef00fec141230f.ctex"]
 
 [params]
 

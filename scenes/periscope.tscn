@@ -1,25 +1,46 @@
-[gd_scene load_steps=41 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=75 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
-[ext_resource type="Texture2D" uid="uid://enk1p7nocyb1" path="res://assets/wheel.png" id="2_kiwbm"]
 [ext_resource type="Texture2D" uid="uid://cxs6p0gnshee8" path="res://assets/SonarCockpit_TexturedShaded.png" id="2_m3ohk"]
-[ext_resource type="Texture2D" uid="uid://cdv8hus40e320" path="res://assets/lever_base.png" id="3_338xf"]
-[ext_resource type="Texture2D" uid="uid://bp5y1fnt3bivp" path="res://assets/lever_handle.png" id="4_h6w8v"]
 [ext_resource type="Script" path="res://scripts/sonar.gd" id="5_xh8vp"]
 [ext_resource type="Texture2D" uid="uid://miqqswk3tst6" path="res://assets/sonar.png" id="6_504a5"]
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="7_0l3lk"]
-[ext_resource type="Texture2D" uid="uid://2l03mury1c1c" path="res://assets/SteerCockpit_Textured.png" id="7_0s20a"]
+[ext_resource type="Texture2D" uid="uid://biuss5b67ot5v" path="res://assets/Periscope_Open.png" id="7_wiqpb"]
 [ext_resource type="Script" path="res://scenes/sonar_lighting.gd" id="7_y0rbn"]
 [ext_resource type="AudioStream" uid="uid://dm3wxlkw3q04o" path="res://assets/620321__marb7e__sonar-ping-sine-wave.wav" id="8_mm24d"]
+[ext_resource type="Texture2D" uid="uid://6a0g8c3ios3b" path="res://assets/SteerCockpit_TexturedShaded.png" id="8_oapwe"]
+[ext_resource type="Texture2D" uid="uid://bnfaa0qlpb00i" path="res://assets/wonky_shapes_2.png" id="9_fymyq"]
 [ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="9_s36rb"]
+[ext_resource type="Script" path="res://scenes/move_room.gd" id="9_up58s"]
+[ext_resource type="Texture2D" uid="uid://chqnj5intdgp4" path="res://assets/right-arrow-icon-isolated-on-transparent-background-free-png-707914464.png" id="9_ycosw"]
 [ext_resource type="AudioStream" uid="uid://b6w2b6yvqhom5" path="res://assets/329915__carmsie__underwater-sounds-loopable.wav" id="10_2vmpd"]
+[ext_resource type="Script" path="res://scripts/periscope_select.gd" id="10_ksiia"]
+[ext_resource type="Texture2D" uid="uid://bgxktml3hvirk" path="res://assets/ExportedWheelPng.png" id="10_miovp"]
 [ext_resource type="Script" path="res://scripts/ship.gd" id="11_c171r"]
+[ext_resource type="Texture2D" uid="uid://dsgvpln3pv2m4" path="res://assets/funky_shapes.png" id="12_7d5ga"]
+[ext_resource type="Texture2D" uid="uid://btr6wdtrnx3xb" path="res://assets/ExportedLeverPng.png" id="12_8ht0b"]
 [ext_resource type="Script" path="res://scripts/camera.gd" id="12_j8tik"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="13_576ip"]
 [ext_resource type="PackedScene" uid="uid://d3iiio81ctyum" path="res://scenes/safezone.tscn" id="13_fid2q"]
-[ext_resource type="PackedScene" uid="uid://d073k3g4crehm" path="res://assets/SubB.fbx" id="14_p7vwf"]
-[ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="17_2d3hs"]
+[ext_resource type="PackedScene" uid="uid://c1iyh2mpm4f03" path="res://assets/SubExported.glb" id="14_emh8o"]
+[ext_resource type="Script" path="res://scripts/steering_lighting.gd" id="15_5onwb"]
+[ext_resource type="PackedScene" uid="uid://cqmr3ori6stjd" path="res://scenes/enemy.tscn" id="20_15dcv"]
+[ext_resource type="Shader" path="res://shaders/blur.gdshader" id="21_2h66y"]
+[ext_resource type="Shader" path="res://shaders/skew.gdshader" id="23_5l4a7"]
+
+[sub_resource type="GDScript" id="GDScript_6yqff"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [sub_resource type="Gradient" id="Gradient_ow8gd"]
 offsets = PackedFloat32Array(0, 0.012987, 1)
@@ -31,12 +52,22 @@ fill = 1
 fill_from = Vector2(0.449541, 0.527523)
 fill_to = Vector2(0.00458716, 0.220183)
 
+[sub_resource type="Gradient" id="Gradient_8h32c"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r1feg"]
+gradient = SubResource("Gradient_8h32c")
+fill = 1
+fill_from = Vector2(0.487179, 0.346154)
+fill_to = Vector2(0.987179, 1)
+
 [sub_resource type="Gradient" id="Gradient_60xlh"]
 offsets = PackedFloat32Array(0.214286, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_kh1gn"]
 gradient = SubResource("Gradient_60xlh")
-fill_to = Vector2(1, 1)
+fill_from = Vector2(0.136752, 0.136752)
+fill_to = Vector2(1, 0.961538)
 
 [sub_resource type="Gradient" id="Gradient_qq1hc"]
 
@@ -46,16 +77,23 @@ fill_from = Vector2(0.940367, 0.655963)
 fill_to = Vector2(0.481651, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y50fn"]
-polygon = PackedVector2Array(137.924, -150.865, 246.717, 260.305, 247.357, 261.162, 241.597, 240.603, 237.118, 224.328, 141.124, -138.016)
+polygon = PackedVector2Array(137.924, -150.865, 246.717, 260.305, 247.357, 261.162)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_juq7x"]
-polygon = PackedVector2Array(417.308, -386.538, 417.308, -386.538, 411.539, -382.692, 398.077, -376.923, 394.231, -386.538, -411.538, -386.538, -411.538, -386.538, 394.231, -386.538, 398.077, -376.923, 411.175, -383.472)
+polygon = PackedVector2Array(398.077, -376.923, 413.461, -380.769, 398.077, -376.923, 396.154, -386.538, -411.538, -386.538, 396.154, -386.538)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_foq88"]
-polygon = PackedVector2Array(-411.538, -386.538, -469.231, -225, -492.308, -232.692, -492.308, -232.692, -519.231, -236.538, -523.077, -238.462, -523.077, -238.462, -886.539, -240.385, -523.077, -238.462, -523.077, -238.462, -519.231, -236.538, -492.308, -232.692, -469.231, -225)
+polygon = PackedVector2Array(-411.538, -386.538, -469.231, -223.077, -492.308, -232.692, -519.231, -236.538, -525, -240.385, -886.539, -240.385, -523.077, -238.462, -523.077, -238.462, -519.231, -236.538, -492.308, -232.692, -469.231, -223.077)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1yukc"]
-polygon = PackedVector2Array(-890.385, -230.769, -884.615, -242.308, -890.385, -230.769, -905.016, -233.532, -961.539, -151.923, -905.769, -232.692)
+polygon = PackedVector2Array(-884.615, -242.308, -901.923, -223.077, -961.539, -151.923)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5hh28"]
+size = Vector2(315.385, 1075)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d7pgk"]
+radius = 280.769
+height = 1073.08
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ulb4i"]
 radius = 477.744
@@ -63,16 +101,96 @@ radius = 477.744
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gaewg"]
 size = Vector2(63.9521, 95.9461)
 
+[sub_resource type="Gradient" id="Gradient_hjyfd"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pned3"]
+gradient = SubResource("Gradient_hjyfd")
+fill = 1
+fill_from = Vector2(0.636752, 0.346154)
+fill_to = Vector2(0.0299145, 0.0512821)
+
+[sub_resource type="Gradient" id="Gradient_jhues"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tuhvr"]
+gradient = SubResource("Gradient_jhues")
+fill = 1
+fill_from = Vector2(0.41453, 0.615385)
+
+[sub_resource type="Gradient" id="Gradient_0wmve"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rjm3y"]
+gradient = SubResource("Gradient_0wmve")
+fill_from = Vector2(0.188034, 0.837607)
+fill_to = Vector2(0.17094, 0.952991)
+
+[sub_resource type="Gradient" id="Gradient_pjppg"]
+offsets = PackedFloat32Array(0, 0.823755)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_slpan"]
+gradient = SubResource("Gradient_pjppg")
+fill = 1
+fill_from = Vector2(0.512821, 0.119658)
+fill_to = Vector2(0.358974, 0.598291)
+
+[sub_resource type="Gradient" id="Gradient_lqv8n"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wwr6b"]
+gradient = SubResource("Gradient_lqv8n")
+fill_from = Vector2(0.333333, 0.987179)
+fill_to = Vector2(0.452991, 0.747863)
+
+[sub_resource type="Gradient" id="Gradient_07fpm"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ehwcm"]
+gradient = SubResource("Gradient_07fpm")
+fill = 1
+fill_from = Vector2(0.641026, 0.769231)
+fill_to = Vector2(0.636752, 0.769231)
+
+[sub_resource type="Gradient" id="Gradient_rfh5e"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vagu1"]
+gradient = SubResource("Gradient_rfh5e")
+fill_from = Vector2(0, 0.461538)
+fill_to = Vector2(0, 0.970085)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2chvn"]
+polygon = PackedVector2Array(-700, 1.9231, -717.308, 538.462, -717.308, 540.385)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r2exb"]
+polygon = PackedVector2Array(711.539, -211.538, 794.231, 234.615, 767.308, 546.154, 794.231, 234.615, 711.539, -211.538, 711.539, -211.538)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ef3bo"]
+polygon = PackedVector2Array(-561.539, 538.462, -542.308, 82.6923, 263.462, 82.6923, 271.154, 82.6923, 278.846, 236.538, 269.231, 540.385)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1scam"]
+polygon = PackedVector2Array(201.923, -244.231, 517.942, -244.231, 713.462, -211.538, 507.692, -246.154)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yqtlx"]
+polygon = PackedVector2Array(-698.077, 0, -493.596, -109.615, 198.711, -98.0769, 203.846, -244.231, 194.865, -101.923, -492.308, -113.462)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqp5f"]
+size = Vector2(278.847, 1078.85)
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_2vffn"]
 viewport_path = NodePath("3d_world/ship_viewport")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_46u4v"]
+size = Vector2(1930, 202)
+
 [sub_resource type="Environment" id="Environment_s2tm8"]
+glow_normalized = true
+glow_intensity = 5.02
 fog_enabled = true
-fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
+fog_light_energy = 6.3
 fog_depth_begin = 0.0
 volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
-volumetric_fog_temporal_reprojection_enabled = false
+volumetric_fog_albedo = Color(0.376864, 0.526846, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
 size = Vector3(0, 10000, 0)
@@ -81,30 +199,44 @@ size = Vector3(0, 10000, 0)
 shader = ExtResource("9_s36rb")
 shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
 shader_parameter/base_color = Color(0.2, 1, 0.4, 1)
-shader_parameter/brightness = 2.0
+shader_parameter/brightness = 4.79
 shader_parameter/noise_level = 0.8
-shader_parameter/vignette_level = 0.37
-shader_parameter/edge_x = 1.0
-shader_parameter/edge_y = 1.0
+shader_parameter/vignette_level = 0.24
+shader_parameter/edge_x = 1.38
+shader_parameter/edge_y = 1.84
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_478a3"]
+size = Vector3(1, 1, 2)
 
-[sub_resource type="Theme" id="Theme_x70uq"]
-default_font = ExtResource("17_2d3hs")
-default_font_size = 20
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_its3d"]
+shader = ExtResource("23_5l4a7")
+shader_parameter/topleft = Vector2(-0.12, 0)
+shader_parameter/topright = null
+shader_parameter/bottomleft = null
+shader_parameter/bottomright = null
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
+[sub_resource type="Theme" id="Theme_mr230"]
+Label/colors/font_color = Color(0, 0.993871, 3.85046e-07, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/constants/line_spacing = -3
+Label/font_sizes/font_size = 28
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_nc1l5"]
-radius = 152.569
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fw484"]
+shader = ExtResource("21_2h66y")
+shader_parameter/lod = 0.7
+
+[sub_resource type="QuadMesh" id="QuadMesh_sjhwb"]
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_688lp")
 
 [node name="sonar_room" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(480, 270)
 scale = Vector2(0.52, 0.52)
 texture = ExtResource("2_m3ohk")
+script = SubResource("GDScript_6yqff")
 
 [node name="sonar" type="Node2D" parent="sonar_room"]
 z_as_relative = false
@@ -113,9 +245,15 @@ scale = Vector2(3.005, 2.245)
 script = ExtResource("5_xh8vp")
 
 [node name="sonar_base" type="Sprite2D" parent="sonar_room/sonar"]
+modulate = Color(0.533037, 0.533037, 0.533037, 1)
+self_modulate = Color(0.32548, 1, 0.299609, 1)
+light_mask = 0
+texture_filter = 2
 texture = ExtResource("6_504a5")
 
-[node name="sonar_line" type="Sprite2D" parent="sonar_room/sonar"]
+[node name="sonar_line" type="Sprite2D" parent="sonar_room/sonar/sonar_base"]
+modulate = Color(0, 1, 0, 1)
+light_mask = 0
 texture = ExtResource("7_0l3lk")
 
 [node name="sonar_sound" type="AudioStreamPlayer" parent="sonar_room/sonar"]
@@ -128,17 +266,29 @@ autoplay = true
 script = ExtResource("7_y0rbn")
 
 [node name="spot_light" type="PointLight2D" parent="sonar_room/lighting"]
-position = Vector2(3.84607, 1.92316)
-scale = Vector2(30.1082, 16.8269)
-color = Color(1, 0.882246, 0.862196, 1)
+light_mask = 3
+position = Vector2(3.84607, -5.76957)
+scale = Vector2(30.1082, 17.0673)
+color = Color(0.935826, 1, 0.931844, 1)
 blend_mode = 2
+range_item_cull_mask = 3
 shadow_enabled = true
+shadow_item_cull_mask = 0
 texture = SubResource("GradientTexture2D_fv4sd")
+
+[node name="spot_light_2" type="PointLight2D" parent="sonar_room/lighting"]
+position = Vector2(3.84625, -21.1538)
+scale = Vector2(15.5649, 16.5865)
+color = Color(0.937255, 1, 0.933333, 1)
+blend_mode = 2
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_r1feg")
 
 [node name="background_1" type="PointLight2D" parent="sonar_room/lighting"]
 position = Vector2(665.385, -0.961506)
 scale = Vector2(9.07452, 16.9171)
-color = Color(0.781261, 0.978954, 0.579232, 1)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+energy = 3.0
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_kh1gn")
@@ -176,37 +326,80 @@ wait_time = 6.0
 one_shot = true
 autostart = true
 
+[node name="move_right" type="Node2D" parent="sonar_room"]
+script = ExtResource("9_up58s")
+
+[node name="Area2D" type="Area2D" parent="sonar_room/move_right"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sonar_room/move_right/Area2D"]
+visible = false
+position = Vector2(792.308, -4.80768)
+shape = SubResource("RectangleShape2D_5hh28")
+
+[node name="move_icon" type="Sprite2D" parent="sonar_room/move_right"]
+self_modulate = Color(100, 100, 100, 0.5)
+light_mask = 0
+position = Vector2(823.077, 11.5385)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_ycosw")
+
+[node name="periscope" type="Node2D" parent="sonar_room"]
+position = Vector2(0, -700)
+script = ExtResource("10_ksiia")
+
+[node name="periscope" type="Sprite2D" parent="sonar_room/periscope"]
+light_mask = 2
+texture = ExtResource("7_wiqpb")
+
+[node name="Area2D" type="Area2D" parent="sonar_room/periscope"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sonar_room/periscope/Area2D"]
+position = Vector2(0, -180.769)
+shape = SubResource("CapsuleShape2D_d7pgk")
+
 [node name="steering_room" type="Sprite2D" parent="."]
-position = Vector2(-520, 270)
+light_mask = 3
+position = Vector2(1478.67, 270)
 scale = Vector2(0.52, 0.52)
-texture = ExtResource("7_0s20a")
+texture = ExtResource("8_oapwe")
+
+[node name="table_things" type="Sprite2D" parent="steering_room"]
+light_mask = 2
+position = Vector2(-344.231, -144.231)
+texture = ExtResource("9_fymyq")
+
+[node name="table_things_2" type="Sprite2D" parent="steering_room"]
+light_mask = 2
+position = Vector2(498.077, -332.692)
+texture = ExtResource("12_7d5ga")
 
 [node name="steering" type="Node2D" parent="steering_room"]
 position = Vector2(169, -128)
 script = ExtResource("1_n7vwt")
 
 [node name="wheel" type="Sprite2D" parent="steering_room/steering"]
-position = Vector2(-394, 3)
+light_mask = 2
+position = Vector2(-382.462, 6.84615)
 scale = Vector2(0.87, 0.87)
-texture = ExtResource("2_kiwbm")
+texture = ExtResource("10_miovp")
 
 [node name="wheel_area" type="Area2D" parent="steering_room/steering/wheel"]
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="steering_room/steering/wheel/wheel_area"]
+visible = false
 shape = SubResource("CircleShape2D_ulb4i")
 
 [node name="lever" type="Node2D" parent="steering_room/steering"]
 texture_filter = 1
-position = Vector2(336, 193)
+position = Vector2(298.605, 102.88)
 scale = Vector2(4.175, 4.175)
 skew = -0.113446
 
-[node name="lever_base" type="Sprite2D" parent="steering_room/steering/lever"]
-texture = ExtResource("3_338xf")
-
 [node name="lever_handle" type="Sprite2D" parent="steering_room/steering/lever"]
-texture = ExtResource("4_h6w8v")
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("12_8ht0b")
 
 [node name="lever_area" type="Area2D" parent="steering_room/steering/lever"]
 
@@ -214,10 +407,146 @@ texture = ExtResource("4_h6w8v")
 position = Vector2(0.0414734, 1.52588e-05)
 shape = SubResource("RectangleShape2D_gaewg")
 
+[node name="lighting" type="Node2D" parent="steering_room"]
+script = ExtResource("15_5onwb")
+
+[node name="spot_light" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(473.077, 3.84616)
+scale = Vector2(30.1382, 17.2476)
+color = Color(0.937255, 1, 0.933333, 1)
+blend_mode = 2
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 0
+texture = SubResource("GradientTexture2D_pned3")
+offset = Vector2(-15.09, 0)
+
+[node name="spot_light2" type="PointLight2D" parent="steering_room/lighting"]
+light_mask = 3
+position = Vector2(-657.692, 365.385)
+scale = Vector2(26.4724, 8.71394)
+color = Color(0.937255, 1, 0.933333, 1)
+energy = 0.9
+blend_mode = 2
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_tuhvr")
+offset = Vector2(21.54, 0)
+
+[node name="background_top" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(-1.92307, -371.154)
+scale = Vector2(30.0481, 22.0563)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_rjm3y")
+offset = Vector2(0, 13.07)
+
+[node name="background_middle" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(158.336, -327.84)
+scale = Vector2(25.4207, 17.0072)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+energy = 1.4
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_slpan")
+offset = Vector2(0, 19.955)
+
+[node name="background_left" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(-818.149, 2.81334e-05)
+scale = Vector2(4.6537, 16.8044)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+energy = 1.6
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_wwr6b")
+
+[node name="background_right" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(925.022, 168.87)
+scale = Vector2(6.61058, 11.8878)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ehwcm")
+offset = Vector2(-15.615, 0)
+
+[node name="background_bottom" type="PointLight2D" parent="steering_room/lighting"]
+position = Vector2(-160.577, 269.231)
+scale = Vector2(15.2945, 8.41346)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_vagu1")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="steering_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_2chvn")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="steering_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_r2exb")
+
+[node name="LightOccluder2D5" type="LightOccluder2D" parent="steering_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_ef3bo")
+
+[node name="LightOccluder2D8" type="LightOccluder2D" parent="steering_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_1scam")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="steering_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_yqtlx")
+
+[node name="background_middle_timer" type="Timer" parent="steering_room/lighting"]
+one_shot = true
+autostart = true
+
+[node name="background_left_timer" type="Timer" parent="steering_room/lighting"]
+wait_time = 9.0
+one_shot = true
+autostart = true
+
+[node name="background_bottom_timer" type="Timer" parent="steering_room/lighting"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="move_left" type="Node2D" parent="steering_room"]
+script = ExtResource("9_up58s")
+
+[node name="Area2D" type="Area2D" parent="steering_room/move_left"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="steering_room/move_left/Area2D"]
+visible = false
+position = Vector2(-813.789, 0.961548)
+shape = SubResource("RectangleShape2D_wqp5f")
+
+[node name="move_icon" type="Sprite2D" parent="steering_room/move_left"]
+self_modulate = Color(100, 100, 100, 0.5)
+light_mask = 0
+position = Vector2(-812.827, 1.92308)
+rotation = 3.14159
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_ycosw")
+
 [node name="periscope_room" type="Sprite2D" parent="."]
 position = Vector2(481, -281)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_2vffn")
+
+[node name="move_down" type="Node2D" parent="periscope_room"]
+position = Vector2(0, 400)
+script = ExtResource("9_up58s")
+
+[node name="move_icon" type="Sprite2D" parent="periscope_room/move_down"]
+modulate = Color(100, 100, 100, 0.5)
+self_modulate = Color(1, 1, 1, 0.5)
+rotation = 1.5708
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_ycosw")
+
+[node name="Area2D" type="Area2D" parent="periscope_room/move_down"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="periscope_room/move_down/Area2D"]
+position = Vector2(-1, 15)
+shape = SubResource("RectangleShape2D_46u4v")
 
 [node name="3d_world" type="Node3D" parent="."]
 
@@ -227,22 +556,25 @@ environment = SubResource("Environment_s2tm8")
 [node name="ship_viewport" type="SubViewport" parent="3d_world"]
 size = Vector2i(1920, 1080)
 
-[node name="ship" type="Node3D" parent="3d_world/ship_viewport" groups=["ship"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
+[node name="ship" type="CharacterBody3D" parent="3d_world/ship_viewport" groups=["ship"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("11_c171r")
 
-[node name="SubB" parent="3d_world/ship_viewport/ship" instance=ExtResource("14_p7vwf")]
-transform = Transform3D(0.315, 0, 0, 0, 0.315, 0, 0, 0, 0.315, 0, 0, 1)
+[node name="SubExported" parent="3d_world/ship_viewport/ship" instance=ExtResource("14_emh8o")]
+transform = Transform3D(-4.37114e-09, 0, 0.15, 0, 0.1, 0, -0.1, 0, -6.55671e-09, 0, 0.05, 0.295)
 
 [node name="sonar_shape_3d" type="ShapeCast3D" parent="3d_world/ship_viewport/ship" groups=["ship_sonar_3d"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
 shape = SubResource("BoxShape3D_gebbv")
-target_position = Vector3(0, 0, -200)
+target_position = Vector3(0, 0, -500)
 debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 
 [node name="camera" type="Camera3D" parent="3d_world/ship_viewport/ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
 current = true
+far = 250.0
 script = ExtResource("12_j8tik")
 
 [node name="ColorRect2" type="ColorRect" parent="3d_world/ship_viewport/ship"]
@@ -256,80 +588,40 @@ grow_vertical = 2
 
 [node name="SpotLight3D" type="SpotLight3D" parent="3d_world/ship_viewport/ship"]
 
-[node name="Area3D" type="Area3D" parent="3d_world/ship_viewport/ship"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/ship_viewport/ship/Area3D"]
-shape = SubResource("BoxShape3D_478a3")
-
 [node name="start_minigame_text" type="RichTextLabel" parent="3d_world/ship_viewport/ship"]
 visible = false
-clip_contents = false
-anchors_preset = -1
-anchor_left = 0.878
-anchor_top = 0.936
-anchor_right = 0.884
-anchor_bottom = 0.936
-offset_left = -960.0
-offset_top = -540.0
-offset_right = -460.0
-offset_bottom = 780.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -23.0
+offset_right = 499.5
+offset_bottom = 477.0
 grow_horizontal = 2
-theme = SubResource("Theme_x70uq")
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 40
-bbcode_enabled = true
-text = "[center]Press Spacebar
-
-To search for note[/center]"
+text = "Press Spacebar
+To search for note"
 fit_content = true
 
-[node name="environment" type="Node3D" parent="3d_world"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/ship_viewport/ship"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+shape = SubResource("BoxShape3D_478a3")
 
-[node name="ground" type="CSGBox3D" parent="3d_world/environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.30327, -17.5797, -1.6549)
-visible = false
-size = Vector3(197.866, 0.203186, 449.211)
-material = SubResource("StandardMaterial3D_6m3fw")
+[node name="enemy2" parent="3d_world" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.726, 0, -134.591)
 
-[node name="cube2" type="CSGBox3D" parent="3d_world/environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.3825, 14.2364, -57.7692)
-use_collision = true
-collision_mask = 0
-size = Vector3(10, 10, 10)
-material = SubResource("StandardMaterial3D_6m3fw")
-
-[node name="cube3" type="CSGBox3D" parent="3d_world/environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.8164, 14.2364, -60.8204)
-use_collision = true
-collision_mask = 0
-size = Vector3(10, 10, 10)
-material = SubResource("StandardMaterial3D_6m3fw")
-
-[node name="cube4" type="CSGBox3D" parent="3d_world/environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.88383, 14.2364, -194.983)
-use_collision = true
-collision_mask = 0
-size = Vector3(10, 10, 10)
-material = SubResource("StandardMaterial3D_6m3fw")
-
-[node name="enemy" type="Node3D" parent="3d_world"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 104.034, -28.3332, -189.626)
-script = ExtResource("13_576ip")
-
-[node name="CSGSphere3D" type="CSGSphere3D" parent="3d_world/enemy"]
-use_collision = true
-collision_mask = 0
-
-[node name="Area3D" type="Area3D" parent="3d_world/enemy"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/enemy/Area3D"]
-shape = SubResource("SphereShape3D_nc1l5")
+[node name="enemy3" parent="3d_world" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.2738, 0, -98.591)
 
 [node name="safezones" type="Node" parent="."]
 
-[node name="safezone" parent="safezones" instance=ExtResource("13_fid2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65891, 11.6786, -64.6187)
+[node name="safezone_1" parent="safezones" instance=ExtResource("13_fid2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, -27, -500)
 
 [node name="sounds" type="Node" parent="."]
 
@@ -338,10 +630,81 @@ stream = ExtResource("10_2vmpd")
 volume_db = -10.0
 autoplay = true
 
+[node name="UI" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+material = SubResource("ShaderMaterial_its3d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+
+[node name="ColorRect2" type="ColorRect" parent="UI"]
+visible = false
+offset_left = 640.0
+offset_top = 399.0
+offset_right = 725.0
+offset_bottom = 440.0
+scale = Vector2(2, 2)
+
+[node name="long_and_lad" type="Label" parent="UI"]
+offset_left = 165.0
+offset_top = 404.0
+offset_right = 275.0
+offset_bottom = 479.0
+theme = SubResource("Theme_mr230")
+text = "200 °N
+200 °W"
+horizontal_alignment = 1
+
+[node name="depth_meter" type="Label" parent="UI"]
+visible = false
+offset_left = -986.0
+offset_top = 5.0
+offset_right = -808.0
+offset_bottom = 52.0
+text = "Depth: "
+
+[node name="compass" type="Label" parent="UI"]
+modulate = Color(0.0807833, 0.0807833, 0.0807833, 1)
+offset_left = 1628.0
+offset_top = 92.0
+offset_right = 1729.0
+offset_bottom = 156.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+text = "N"
+horizontal_alignment = 1
+
+[node name="blur" type="MeshInstance2D" parent="UI"]
+visible = false
+light_mask = 0
+material = SubResource("ShaderMaterial_fw484")
+position = Vector2(988.5, -5.00003)
+scale = Vector2(1997, 1110)
+mesh = SubResource("QuadMesh_sjhwb")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
 [connection signal="timeout" from="sonar_room/lighting/background_1_timer" to="sonar_room/lighting" method="_on_background_1_timer_timeout"]
 [connection signal="timeout" from="sonar_room/lighting/background_2_timer" to="sonar_room/lighting" method="_on_background_2_timer_timeout"]
+[connection signal="mouse_entered" from="sonar_room/move_right/Area2D" to="sonar_room/move_right" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="sonar_room/move_right/Area2D" to="sonar_room/move_right" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="sonar_room/periscope/Area2D" to="sonar_room/periscope" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="sonar_room/periscope/Area2D" to="sonar_room/periscope" method="_on_area_2d_mouse_exited"]
 [connection signal="input_event" from="steering_room/steering/wheel/wheel_area" to="steering_room/steering" method="_on_wheel_area_input_event"]
 [connection signal="input_event" from="steering_room/steering/lever/lever_area" to="steering_room/steering" method="_on_lever_area_input_event"]
-[connection signal="area_entered" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_exited"]
-[connection signal="body_entered" from="3d_world/enemy/Area3D" to="3d_world/enemy" method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="steering_room/lighting/background_middle_timer" to="steering_room/lighting" method="_on_background_middle_timer_timeout"]
+[connection signal="timeout" from="steering_room/lighting/background_left_timer" to="steering_room/lighting" method="_on_background_left_timer_timeout"]
+[connection signal="timeout" from="steering_room/lighting/background_bottom_timer" to="steering_room/lighting" method="_on_background_bottom_timer_timeout"]
+[connection signal="mouse_entered" from="steering_room/move_left/Area2D" to="steering_room/move_left" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="steering_room/move_left/Area2D" to="steering_room/move_left" method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="periscope_room/move_down/Area2D" to="periscope_room/move_down" method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="periscope_room/move_down/Area2D" to="periscope_room/move_down" method="_on_area_2d_mouse_exited"]

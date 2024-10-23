@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdv8hus40e320"
-path="res://.godot/imported/lever_base.png-67dcb6c7ad0c13844fcc4ffca4d7f9a9.ctex"
+uid="uid://biuss5b67ot5v"
+path="res://.godot/imported/Periscope_Open.png-e4d86e552850a445bda5c529c1f15b76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/lever_base.png"
-dest_files=["res://.godot/imported/lever_base.png-67dcb6c7ad0c13844fcc4ffca4d7f9a9.ctex"]
+source_file="res://assets/Periscope_Open.png"
+dest_files=["res://.godot/imported/Periscope_Open.png-e4d86e552850a445bda5c529c1f15b76.ctex"]
 
 [params]
 

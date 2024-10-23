@@ -1,13 +1,14 @@
 extends Node2D
 
 @onready var sonar_base = $sonar_base
-@onready var sonar_line: Sprite2D = $sonar_line
+@onready var sonar_line = $sonar_base/sonar_line
+
 var ship
 var ship_sonar_3d
 
 const SONAR_HIT = preload("res://scenes/sonar_hit.tscn")
 
-const MAX_DISTANCE_3D = 200.
+const MAX_DISTANCE_3D = 500.
 const MAX_DISTANCE_2D = 122. # figure this out
 
 
@@ -21,12 +22,12 @@ func _process(_delta):
 	
 	for n in ship_sonar_3d.get_collision_count():
 		var distance = ship.global_position.distance_to(ship_sonar_3d.get_collision_point(n))
-		var distance_2d = (distance / MAX_DISTANCE_3D) * MAX_DISTANCE_2D * -1
-	
-		var hit = SONAR_HIT.instantiate()
-		hit.rotation = sonar_line.rotation
-		add_child(hit)
-		hit.init_hit(distance_2d)
+		if distance <= MAX_DISTANCE_3D:
+			var distance_2d = (distance / MAX_DISTANCE_3D) * MAX_DISTANCE_2D * -1
+			var hit = SONAR_HIT.instantiate()
+			hit.rotation = sonar_line.rotation
+			add_child(hit)
+			hit.init_hit(distance_2d)
 		
 		
 	

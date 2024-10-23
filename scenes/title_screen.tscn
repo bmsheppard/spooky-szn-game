@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfwm4i63atsq8"]
+[gd_scene load_steps=9 format=3 uid="uid://du8kc8kopdsdr"]
 
 [ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_e1d10"]
 [ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="1_igyby"]
@@ -158,11 +158,11 @@ text = "[center]Use the coordinates located on the main dashboard to find safezo
 
 Nearby enemy subs will attempt to ram you, avoid them at all costs using your ships navigation.
 
-Press Y (or click the periscope idk) and use your mouse to look ahead of you.
+Your ship has three rooms: Sonar, Steering, and Periscope.
 
-Press T to switch between the radar and your sub controls.
+Click on the sides or top of the screen to move to another room.
 
-Click and drag your mouse on the wheel to move the ship left/right
+Click and drag your mouse on the steering wheel to move the ship left/right
 
 Click and drag your mouse on the lever to move the ship up/down.
 
