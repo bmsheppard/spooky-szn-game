@@ -3,7 +3,6 @@ extends Node2D
 @onready var song = $Periscope
 @onready var title = $CanvasLayer/gui/title
 @onready var instructions = $CanvasLayer/gui/instructions
-
 func _ready():
 	song.playing = true
 	title.visible = true

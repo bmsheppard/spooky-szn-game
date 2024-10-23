@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Spooky SZN Game"
-run/main_scene="res://scenes/periscope.tscn"
+config/name="Periscope"
+run/main_scene="res://scenes/title_screen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -59,3 +59,4 @@ pull_treasure={
 
 3d_physics/layer_1="Sonar"
 3d_physics/layer_2="ship"
+3d_physics/layer_3="enemy"

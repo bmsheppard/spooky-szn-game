@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=80 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/sonar.gd" id="5_xh8vp"]
 [ext_resource type="Texture2D" uid="uid://miqqswk3tst6" path="res://assets/sonar.png" id="6_504a5"]
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="7_0l3lk"]
+[ext_resource type="Texture2D" uid="uid://bbtygppjyd6af" path="res://assets/empty_frame.png" id="7_u6t6f"]
 [ext_resource type="Texture2D" uid="uid://biuss5b67ot5v" path="res://assets/Periscope_Open.png" id="7_wiqpb"]
 [ext_resource type="Script" path="res://scenes/sonar_lighting.gd" id="7_y0rbn"]
 [ext_resource type="AudioStream" uid="uid://dm3wxlkw3q04o" path="res://assets/620321__marb7e__sonar-ping-sine-wave.wav" id="8_mm24d"]
@@ -50,8 +51,8 @@ colors = PackedColorArray(0.769397, 0.238513, 0.191465, 1, 1, 1, 1, 1, 0, 0, 0, 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_fv4sd"]
 gradient = SubResource("Gradient_ow8gd")
 fill = 1
-fill_from = Vector2(0.449541, 0.527523)
-fill_to = Vector2(0.00458716, 0.220183)
+fill_from = Vector2(0.521368, 0.581197)
+fill_to = Vector2(0.0512821, 0.200855)
 
 [sub_resource type="Gradient" id="Gradient_8h32c"]
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
@@ -157,7 +158,7 @@ fill_to = Vector2(0.636752, 0.769231)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vagu1"]
 gradient = SubResource("Gradient_rfh5e")
-fill_from = Vector2(0, 0.461538)
+fill_from = Vector2(0, 0.423077)
 fill_to = Vector2(0, 0.970085)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2chvn"]
@@ -185,22 +186,31 @@ viewport_path = NodePath("3d_world/ship_viewport")
 size = Vector2(1930, 202)
 
 [sub_resource type="Environment" id="Environment_s2tm8"]
+background_mode = 1
+background_color = Color(0.28485, 0.28485, 0.28485, 1)
 glow_normalized = true
 glow_intensity = 5.02
 fog_enabled = true
-fog_light_energy = 6.3
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 1.76
+fog_density = 1.0
 fog_depth_begin = 0.0
-volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.376864, 0.526846, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
-size = Vector3(0, 10000, 0)
+size = Vector3(0, 400, 0)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_lyc0i"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 100.0
+dof_blur_far_transition = 115.72
+dof_blur_amount = 0.13
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fmkt4"]
 shader = ExtResource("9_s36rb")
 shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
 shader_parameter/base_color = Color(0.2, 1, 0.4, 1)
-shader_parameter/brightness = 4.79
+shader_parameter/brightness = 3.05
 shader_parameter/noise_level = 0.8
 shader_parameter/vignette_level = 0.24
 shader_parameter/edge_x = 1.38
@@ -216,10 +226,12 @@ shader_parameter/topright = null
 shader_parameter/bottomleft = null
 shader_parameter/bottomright = null
 
+[sub_resource type="Theme" id="Theme_timwe"]
+
 [sub_resource type="Theme" id="Theme_mr230"]
-Label/colors/font_color = Color(0, 0.993871, 3.85046e-07, 1)
+Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
-Label/colors/font_shadow_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0.176419, 0.176419, 0.176419, 1)
 Label/constants/line_spacing = -3
 Label/font_sizes/font_size = 28
 
@@ -228,6 +240,12 @@ shader = ExtResource("21_2h66y")
 shader_parameter/lod = 0.7
 
 [sub_resource type="QuadMesh" id="QuadMesh_sjhwb"]
+
+[sub_resource type="Theme" id="Theme_ivwgl"]
+default_font_size = 28
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_688lp")
@@ -263,13 +281,19 @@ volume_db = -20.0
 pitch_scale = 0.8
 autoplay = true
 
+[node name="frame" type="Sprite2D" parent="sonar_room/sonar"]
+position = Vector2(161.16, 174.205)
+scale = Vector2(0.398, 0.445)
+texture = ExtResource("7_u6t6f")
+flip_h = true
+
 [node name="lighting" type="Node2D" parent="sonar_room"]
 script = ExtResource("7_y0rbn")
 
 [node name="spot_light" type="PointLight2D" parent="sonar_room/lighting"]
 light_mask = 3
-position = Vector2(3.84607, -5.76957)
-scale = Vector2(30.1082, 17.0673)
+position = Vector2(-1.92269, 0.961246)
+scale = Vector2(30.2885, 16.857)
 color = Color(0.935826, 1, 0.931844, 1)
 blend_mode = 2
 range_item_cull_mask = 3
@@ -286,8 +310,8 @@ range_item_cull_mask = 2
 texture = SubResource("GradientTexture2D_r1feg")
 
 [node name="background_1" type="PointLight2D" parent="sonar_room/lighting"]
-position = Vector2(665.385, -0.961506)
-scale = Vector2(9.07452, 16.9171)
+position = Vector2(668.269, -0.961506)
+scale = Vector2(9.16466, 16.9171)
 color = Color(0.780392, 0.980392, 0.580392, 1)
 energy = 3.0
 blend_mode = 2
@@ -295,8 +319,8 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_kh1gn")
 
 [node name="background_2" type="PointLight2D" parent="sonar_room/lighting"]
-position = Vector2(-603.846, -411.538)
-scale = Vector2(30.0462, 5.85938)
+position = Vector2(-610.896, -399.945)
+scale = Vector2(30.1818, 5.4988)
 color = Color(0.780392, 0.980392, 0.580392, 1)
 blend_mode = 2
 shadow_enabled = true
@@ -476,7 +500,6 @@ offset = Vector2(-15.615, 0)
 position = Vector2(-160.577, 269.231)
 scale = Vector2(15.2945, 8.41346)
 color = Color(0.780392, 0.980392, 0.580392, 1)
-energy = 0.1
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_vagu1")
@@ -556,10 +579,10 @@ shape = SubResource("RectangleShape2D_46u4v")
 environment = SubResource("Environment_s2tm8")
 
 [node name="ship_viewport" type="SubViewport" parent="3d_world"]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="ship" type="CharacterBody3D" parent="3d_world/ship_viewport" groups=["ship"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("11_c171r")
@@ -575,8 +598,8 @@ debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 
 [node name="camera" type="Camera3D" parent="3d_world/ship_viewport/ship"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
+attributes = SubResource("CameraAttributesPractical_lyc0i")
 current = true
-far = 250.0
 script = ExtResource("12_j8tik")
 
 [node name="ColorRect2" type="ColorRect" parent="3d_world/ship_viewport/ship"]
@@ -587,8 +610,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SpotLight3D" type="SpotLight3D" parent="3d_world/ship_viewport/ship"]
 
 [node name="start_minigame_text" type="RichTextLabel" parent="3d_world/ship_viewport/ship"]
 visible = false
@@ -614,16 +635,51 @@ fit_content = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 shape = SubResource("BoxShape3D_478a3")
 
-[node name="enemy2" parent="3d_world" instance=ExtResource("20_15dcv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -115.726, 0, -134.591)
+[node name="enemies" type="Node3D" parent="3d_world"]
 
-[node name="enemy3" parent="3d_world" instance=ExtResource("20_15dcv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.2738, 0, -98.591)
+[node name="enemy6" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -645.726, 0, 1.409)
+
+[node name="enemy" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -249.726, 0, -267.591)
+
+[node name="enemy2" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -452.726, 0, -436.591)
+
+[node name="enemy3" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -451.726, 53, -228.591)
+
+[node name="enemy4" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -362.726, -51, -324.591)
+
+[node name="enemy5" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -761.726, 0, -254.591)
+
+[node name="enemy7" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, 0, -102.591)
+
+[node name="enemy8" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -821.726, 0, 248.409)
+
+[node name="enemy9" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1009.73, -215, -102.591)
+
+[node name="enemy10" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, -28, 128.409)
+
+[node name="enemy11" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1044.73, 0, -369.591)
 
 [node name="safezones" type="Node" parent="."]
 
 [node name="safezone_1" parent="safezones" instance=ExtResource("13_fid2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300, -27, -500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -300)
+
+[node name="safezone_2" parent="safezones" instance=ExtResource("13_fid2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -600, 60, -400)
+
+[node name="safezone_3" parent="safezones" instance=ExtResource("13_fid2q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1000, 0, 200)
 
 [node name="sounds" type="Node" parent="."]
 
@@ -645,11 +701,12 @@ scale = Vector2(2, 2)
 
 [node name="ColorRect2" type="ColorRect" parent="UI"]
 visible = false
-offset_left = 640.0
-offset_top = 399.0
-offset_right = 725.0
-offset_bottom = 440.0
+offset_left = 598.0
+offset_top = 416.0
+offset_right = 707.0
+offset_bottom = 460.0
 scale = Vector2(2, 2)
+theme = SubResource("Theme_timwe")
 
 [node name="long_and_lad" type="Label" parent="UI"]
 offset_left = 165.0
@@ -694,6 +751,19 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="safe_zone" type="Label" parent="UI"]
+offset_left = 651.0
+offset_top = 412.0
+offset_right = 914.0
+offset_bottom = 530.0
+scale = Vector2(0.6, 0.6)
+theme = SubResource("Theme_ivwgl")
+theme_override_constants/line_spacing = 10
+text = "Safe Zone
+-500 °N 300 °W"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="depth_indicators" type="Node2D" parent="UI"]
 script = ExtResource("28_2awn4")
@@ -742,7 +812,6 @@ offset_bottom = 358.0
 color = Color(0, 0, 0, 1)
 
 [node name="bar7" type="ColorRect" parent="UI/depth_indicators"]
-anchors_preset = -1
 offset_left = 1124.0
 offset_top = 321.0
 offset_right = 1160.0

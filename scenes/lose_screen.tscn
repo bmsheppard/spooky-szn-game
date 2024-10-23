@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://basq6xva7wcvd"]
+[gd_scene load_steps=8 format=3 uid="uid://bkgppinf7i126"]
 
 [ext_resource type="Script" path="res://scripts/win_screen.gd" id="1_t6kxr"]
 [ext_resource type="AudioStream" uid="uid://c2twdtdiur1jd" path="res://assets/periscope.ogg" id="2_bouf0"]
