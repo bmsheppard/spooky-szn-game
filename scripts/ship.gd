@@ -15,6 +15,7 @@ var start_long_lad = Vector2(200,200)
 var start_global_position
 
 func _ready():
+	minigame_text.visible = false
 	SignalBus.restart_main_game.connect(restart_main_game)
 	start_global_position = global_position
 	

@@ -1,0 +1,173 @@
+[gd_scene load_steps=9 format=3 uid="uid://du8kc8kopdsdr"]
+
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_e1d10"]
+[ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="1_igyby"]
+[ext_resource type="AudioStream" uid="uid://c2twdtdiur1jd" path="res://assets/periscope.ogg" id="2_fy1ea"]
+[ext_resource type="FontFile" uid="uid://cko7uub0nskn8" path="res://assets/Yeager-Bold.otf" id="2_vju81"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g8l0y"]
+shader = ExtResource("1_igyby")
+shader_parameter/luminance = Color(0.3086, 0.6094, 0.082, 1)
+shader_parameter/base_color = Color(0.2, 1, 0.4, 1)
+shader_parameter/brightness = 2.0
+shader_parameter/noise_level = 0.8
+shader_parameter/vignette_level = 0.37
+shader_parameter/edge_x = 1.0
+shader_parameter/edge_y = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_pk1tl"]
+font = ExtResource("2_vju81")
+font_size = 80
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 0.956863)
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="Theme" id="Theme_phh6e"]
+default_font = ExtResource("2_vju81")
+default_font_size = 25
+
+[sub_resource type="Theme" id="Theme_mcjhr"]
+default_font = ExtResource("2_vju81")
+default_font_size = 20
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_e1d10")
+
+[node name="Periscope" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fy1ea")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="gui" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/gui"]
+z_index = -1
+material = SubResource("ShaderMaterial_g8l0y")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Control" parent="CanvasLayer/gui"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="title" type="Label" parent="CanvasLayer/gui/title"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -40.0
+offset_right = 196.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Periscope"
+label_settings = SubResource("LabelSettings_pk1tl")
+
+[node name="play" type="Button" parent="CanvasLayer/gui/title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 10.0
+offset_right = -100.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_phh6e")
+text = "play"
+
+[node name="instructions" type="Button" parent="CanvasLayer/gui/title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 10.0
+offset_right = -100.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_phh6e")
+text = "instructions"
+
+[node name="instructions" type="Control" parent="CanvasLayer/gui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="back" type="Button" parent="CanvasLayer/gui/instructions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = 30.0
+offset_right = 90.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_phh6e")
+text = "back"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/gui/instructions"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = -134.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_mcjhr")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/line_separation = 4
+bbcode_enabled = true
+text = "[center]Use the coordinates located on the main dashboard to find safezones while avoiding enemy subs. Safezones and enemy subs appear as white dots on the radar. 
+
+Nearby enemy subs will attempt to ram you, avoid them at all costs using your ships navigation.
+
+Your ship has three rooms: Sonar, Steering, and Periscope.
+
+Click on the sides or top of the screen to move to another room.
+
+Click and drag your mouse on the steering wheel to move the ship left/right
+
+Click and drag your mouse on the lever to move the ship up/down.
+
+Good luck and safe travels captain![/center]"
+
+[connection signal="pressed" from="CanvasLayer/gui/title/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/gui/title/instructions" to="." method="_on_instructions_pressed"]
+[connection signal="pressed" from="CanvasLayer/gui/instructions/back" to="." method="_on_back_pressed"]
