@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqmr3ori6stjd"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_yfq4g"]
+[ext_resource type="PackedScene" uid="uid://c1iyh2mpm4f03" path="res://assets/SubExported.glb" id="2_jgngg"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yk0xd"]
+radius = 1.0
+height = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ve1yb"]
+radius = 67.0
+
+[node name="enemy" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.7262, 0, -102.591)
+script = ExtResource("1_yfq4g")
+
+[node name="SubExported" parent="." instance=ExtResource("2_jgngg")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_yk0xd")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.22, 0.29, 0)
+light_energy = 11.526
+spot_range = 14.728
+spot_angle = 18.7235
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ve1yb")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

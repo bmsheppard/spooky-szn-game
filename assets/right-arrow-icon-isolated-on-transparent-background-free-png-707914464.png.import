@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vg5oe1buf3lr"
-path="res://.godot/imported/sonar_room.png-07fbbdb322cd508420ff7132970ae42e.ctex"
+uid="uid://chqnj5intdgp4"
+path="res://.godot/imported/right-arrow-icon-isolated-on-transparent-background-free-png-707914464.png-d015065f7748199b91b1caa8dad97e96.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sonar_room.png"
-dest_files=["res://.godot/imported/sonar_room.png-07fbbdb322cd508420ff7132970ae42e.ctex"]
+source_file="res://assets/right-arrow-icon-isolated-on-transparent-background-free-png-707914464.png"
+dest_files=["res://.godot/imported/right-arrow-icon-isolated-on-transparent-background-free-png-707914464.png-d015065f7748199b91b1caa8dad97e96.ctex"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://d073k3g4crehm"
-path="res://.godot/imported/SubB.fbx-1fea50e66a308ef269824fcc6682baaf.scn"
+uid="uid://c1iyh2mpm4f03"
+path="res://.godot/imported/SubExported.glb-5413c4d4a6eed06cd0505eaadc85481e.scn"
 
 [deps]
 
-source_file="res://assets/SubB.fbx"
-dest_files=["res://.godot/imported/SubB.fbx-1fea50e66a308ef269824fcc6682baaf.scn"]
+source_file="res://assets/SubExported.glb"
+dest_files=["res://.godot/imported/SubExported.glb-5413c4d4a6eed06cd0505eaadc85481e.scn"]
 
 [params]
 
@@ -27,11 +27,10 @@ meshes/force_disable_compression=false
 skins/use_named_skins=true
 animation/import=true
 animation/fps=30
-animation/trimming=true
+animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
 _subresources={}
-fbx/importer=0
-fbx/allow_geometry_helper_nodes=false
-fbx/embedded_image_handling=1
+gltf/naming_version=1
+gltf/embedded_image_handling=1

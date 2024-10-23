@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5wlodpggqvl"
-path="res://.godot/imported/steering_room.png-f08ee3d9a209fe6bced389eb66f83a65.ctex"
+uid="uid://btr6wdtrnx3xb"
+path="res://.godot/imported/ExportedLeverPng.png-a5cf407d792f63eea5621bff7186c722.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/steering_room.png"
-dest_files=["res://.godot/imported/steering_room.png-f08ee3d9a209fe6bced389eb66f83a65.ctex"]
+source_file="res://assets/ExportedLeverPng.png"
+dest_files=["res://.godot/imported/ExportedLeverPng.png-a5cf407d792f63eea5621bff7186c722.ctex"]
 
 [params]
 

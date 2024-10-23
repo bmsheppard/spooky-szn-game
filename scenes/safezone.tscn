@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3iiio81ctyum"]
+[gd_scene load_steps=7 format=3 uid="uid://d3iiio81ctyum"]
 
 [ext_resource type="Script" path="res://scripts/safezone.gd" id="1_2expl"]
 [ext_resource type="Shader" uid="uid://dl3epcmdfmqoa" path="res://shaders/safezone.tres" id="1_b6rdr"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xvu5u"]
+radius = 10.5889
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jy6nf"]
 radius = 50.0
@@ -19,6 +22,13 @@ radius = 50.0
 height = 100.0
 
 [node name="safezone" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(0.99541, 0, 0, 0, 0.99541, 0, 0, 0, 0.99541, 0, 0, 0)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("SphereShape3D_xvu5u")
 
 [node name="Area3D" type="Area3D" parent="."]
 script = ExtResource("1_2expl")
