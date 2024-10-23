@@ -1,15 +1,16 @@
-[gd_scene load_steps=27 format=3 uid="uid://b3q8pvsu5brxa"]
+[gd_scene load_steps=39 format=3 uid="uid://b3q8pvsu5brxa"]
 
 [ext_resource type="Script" path="res://scripts/root.gd" id="1_688lp"]
 [ext_resource type="Script" path="res://scripts/steering.gd" id="1_n7vwt"]
-[ext_resource type="Texture2D" uid="uid://vg5oe1buf3lr" path="res://assets/sonar_room.png" id="1_pe883"]
 [ext_resource type="Texture2D" uid="uid://enk1p7nocyb1" path="res://assets/wheel.png" id="2_kiwbm"]
+[ext_resource type="Texture2D" uid="uid://cxs6p0gnshee8" path="res://assets/SonarCockpit_TexturedShaded.png" id="2_m3ohk"]
 [ext_resource type="Texture2D" uid="uid://cdv8hus40e320" path="res://assets/lever_base.png" id="3_338xf"]
 [ext_resource type="Texture2D" uid="uid://bp5y1fnt3bivp" path="res://assets/lever_handle.png" id="4_h6w8v"]
 [ext_resource type="Script" path="res://scripts/sonar.gd" id="5_xh8vp"]
 [ext_resource type="Texture2D" uid="uid://miqqswk3tst6" path="res://assets/sonar.png" id="6_504a5"]
-[ext_resource type="Texture2D" uid="uid://c5wlodpggqvl" path="res://assets/steering_room.png" id="6_or61o"]
 [ext_resource type="Texture2D" uid="uid://b84jv3dii6dx6" path="res://assets/sonar_line.png" id="7_0l3lk"]
+[ext_resource type="Texture2D" uid="uid://2l03mury1c1c" path="res://assets/SteerCockpit_Textured.png" id="7_0s20a"]
+[ext_resource type="Script" path="res://scenes/sonar_lighting.gd" id="7_y0rbn"]
 [ext_resource type="AudioStream" uid="uid://dm3wxlkw3q04o" path="res://assets/620321__marb7e__sonar-ping-sine-wave.wav" id="8_mm24d"]
 [ext_resource type="Shader" path="res://shaders/periscope.gdshader" id="9_s36rb"]
 [ext_resource type="AudioStream" uid="uid://b6w2b6yvqhom5" path="res://assets/329915__carmsie__underwater-sounds-loopable.wav" id="10_2vmpd"]
@@ -17,6 +18,43 @@
 [ext_resource type="Script" path="res://scripts/camera.gd" id="12_j8tik"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="13_576ip"]
 [ext_resource type="PackedScene" uid="uid://d3iiio81ctyum" path="res://scenes/safezone.tscn" id="13_fid2q"]
+[ext_resource type="PackedScene" uid="uid://d073k3g4crehm" path="res://assets/SubB.fbx" id="14_p7vwf"]
+
+[sub_resource type="Gradient" id="Gradient_ow8gd"]
+offsets = PackedFloat32Array(0, 0.012987, 1)
+colors = PackedColorArray(0.769397, 0.238513, 0.191465, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fv4sd"]
+gradient = SubResource("Gradient_ow8gd")
+fill = 1
+fill_from = Vector2(0.449541, 0.527523)
+fill_to = Vector2(0.00458716, 0.220183)
+
+[sub_resource type="Gradient" id="Gradient_60xlh"]
+offsets = PackedFloat32Array(0.214286, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kh1gn"]
+gradient = SubResource("Gradient_60xlh")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_qq1hc"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8q22"]
+gradient = SubResource("Gradient_qq1hc")
+fill_from = Vector2(0.940367, 0.655963)
+fill_to = Vector2(0.481651, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y50fn"]
+polygon = PackedVector2Array(137.924, -150.865, 246.717, 260.305, 247.357, 261.162, 241.597, 240.603, 237.118, 224.328, 141.124, -138.016)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_juq7x"]
+polygon = PackedVector2Array(417.308, -386.538, 417.308, -386.538, 411.539, -382.692, 398.077, -376.923, 394.231, -386.538, -411.538, -386.538, -411.538, -386.538, 394.231, -386.538, 398.077, -376.923, 411.175, -383.472)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_foq88"]
+polygon = PackedVector2Array(-411.538, -386.538, -469.231, -225, -492.308, -232.692, -492.308, -232.692, -519.231, -236.538, -523.077, -238.462, -523.077, -238.462, -886.539, -240.385, -523.077, -238.462, -523.077, -238.462, -519.231, -236.538, -492.308, -232.692, -469.231, -225)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1yukc"]
+polygon = PackedVector2Array(-890.385, -230.769, -884.615, -242.308, -890.385, -230.769, -905.016, -233.532, -961.539, -151.923, -905.769, -232.692)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ulb4i"]
 radius = 477.744
@@ -26,6 +64,14 @@ size = Vector2(63.9521, 95.9461)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2vffn"]
 viewport_path = NodePath("3d_world/ship_viewport")
+
+[sub_resource type="Environment" id="Environment_s2tm8"]
+fog_enabled = true
+fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
+fog_depth_begin = 0.0
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
+volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
 size = Vector3(0, 10000, 0)
@@ -44,23 +90,16 @@ shader_parameter/edge_y = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6m3fw"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_d8mt6"]
-radius = 10.8895
-
-[sub_resource type="Environment" id="Environment_s2tm8"]
-fog_enabled = true
-fog_light_color = Color(0.0372, 0.10204, 0.249384, 1)
-fog_depth_begin = 0.0
-volumetric_fog_enabled = true
-volumetric_fog_albedo = Color(0.0313726, 0, 0.4, 1)
-volumetric_fog_temporal_reprojection_enabled = false
+[sub_resource type="SphereShape3D" id="SphereShape3D_nc1l5"]
+radius = 152.569
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_688lp")
 
 [node name="sonar_room" type="Sprite2D" parent="."]
-position = Vector2(960, 540)
-texture = ExtResource("1_pe883")
+position = Vector2(480, 270)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("2_m3ohk")
 
 [node name="sonar" type="Node2D" parent="sonar_room"]
 z_as_relative = false
@@ -69,21 +108,73 @@ scale = Vector2(3.005, 2.245)
 script = ExtResource("5_xh8vp")
 
 [node name="sonar_base" type="Sprite2D" parent="sonar_room/sonar"]
-texture_filter = 1
 texture = ExtResource("6_504a5")
 
 [node name="sonar_line" type="Sprite2D" parent="sonar_room/sonar"]
-texture_filter = 1
 texture = ExtResource("7_0l3lk")
 
 [node name="sonar_sound" type="AudioStreamPlayer" parent="sonar_room/sonar"]
 stream = ExtResource("8_mm24d")
 volume_db = -20.0
 pitch_scale = 0.8
+autoplay = true
+
+[node name="lighting" type="Node2D" parent="sonar_room"]
+script = ExtResource("7_y0rbn")
+
+[node name="spot_light" type="PointLight2D" parent="sonar_room/lighting"]
+position = Vector2(3.84607, 1.92316)
+scale = Vector2(30.1082, 16.8269)
+color = Color(1, 0.882246, 0.862196, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_fv4sd")
+
+[node name="background_1" type="PointLight2D" parent="sonar_room/lighting"]
+position = Vector2(665.385, -0.961506)
+scale = Vector2(9.07452, 16.9171)
+color = Color(0.781261, 0.978954, 0.579232, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_kh1gn")
+
+[node name="background_2" type="PointLight2D" parent="sonar_room/lighting"]
+position = Vector2(-603.846, -411.538)
+scale = Vector2(30.0462, 5.85938)
+color = Color(0.780392, 0.980392, 0.580392, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_y8q22")
+offset = Vector2(20, 6.46)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="sonar_room/lighting"]
+modulate = Color(0, 1, 1, 1)
+position = Vector2(-1, -44)
+scale = Vector2(3.005, 2.245)
+occluder = SubResource("OccluderPolygon2D_y50fn")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="sonar_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_juq7x")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="sonar_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_foq88")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="sonar_room/lighting"]
+occluder = SubResource("OccluderPolygon2D_1yukc")
+
+[node name="background_1_timer" type="Timer" parent="sonar_room/lighting"]
+one_shot = true
+autostart = true
+
+[node name="background_2_timer" type="Timer" parent="sonar_room/lighting"]
+wait_time = 6.0
+one_shot = true
+autostart = true
 
 [node name="steering_room" type="Sprite2D" parent="."]
-position = Vector2(-960, 540)
-texture = ExtResource("6_or61o")
+position = Vector2(-520, 270)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("7_0s20a")
 
 [node name="steering" type="Node2D" parent="steering_room"]
 position = Vector2(169, -128)
@@ -119,10 +210,14 @@ position = Vector2(0.0414734, 1.52588e-05)
 shape = SubResource("RectangleShape2D_gaewg")
 
 [node name="periscope_room" type="Sprite2D" parent="."]
-position = Vector2(960, -540)
+position = Vector2(481, -281)
+scale = Vector2(0.5, 0.5)
 texture = SubResource("ViewportTexture_2vffn")
 
 [node name="3d_world" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3d_world"]
+environment = SubResource("Environment_s2tm8")
 
 [node name="ship_viewport" type="SubViewport" parent="3d_world"]
 size = Vector2i(1920, 1080)
@@ -131,12 +226,8 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101995, -0.0312176, -0.0100555)
 script = ExtResource("11_c171r")
 
-[node name="body" type="CSGBox3D" parent="3d_world/ship_viewport/ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.041, -0.121877)
-use_collision = true
-collision_layer = 2
-collision_mask = 0
-size = Vector3(0.513245, 0.330933, 0.447754)
+[node name="SubB" parent="3d_world/ship_viewport/ship" instance=ExtResource("14_p7vwf")]
+transform = Transform3D(0.315, 0, 0, 0, 0.315, 0, 0, 0, 0.315, 0, 0, 1)
 
 [node name="sonar_shape_3d" type="ShapeCast3D" parent="3d_world/ship_viewport/ship" groups=["ship_sonar_3d"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0101995, 0.0312176, 0.0100555)
@@ -158,9 +249,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="temp_shape" type="CSGBox3D" parent="3d_world/ship_viewport/ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, -0.12)
-size = Vector3(0.5, 0.33, 0.45)
+[node name="SpotLight3D" type="SpotLight3D" parent="3d_world/ship_viewport/ship"]
 
 [node name="Area3D" type="Area3D" parent="3d_world/ship_viewport/ship"]
 
@@ -217,25 +306,24 @@ size = Vector3(10, 10, 10)
 material = SubResource("StandardMaterial3D_6m3fw")
 
 [node name="enemy" type="Node3D" parent="3d_world"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6.92859)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 104.034, -28.3332, -189.626)
 script = ExtResource("13_576ip")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="3d_world/enemy"]
+use_collision = true
+collision_mask = 0
 
 [node name="Area3D" type="Area3D" parent="3d_world/enemy"]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="3d_world/enemy/Area3D"]
-shape = SubResource("SphereShape3D_d8mt6")
-
-[node name="fog" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_s2tm8")
+shape = SubResource("SphereShape3D_nc1l5")
 
 [node name="safezones" type="Node" parent="."]
 
 [node name="safezone" parent="safezones" instance=ExtResource("13_fid2q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -92.4852)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -328, -76.3624)
 
 [node name="sounds" type="Node" parent="."]
 
@@ -244,8 +332,8 @@ stream = ExtResource("10_2vmpd")
 volume_db = -10.0
 autoplay = true
 
+[connection signal="timeout" from="sonar_room/lighting/background_1_timer" to="sonar_room/lighting" method="_on_background_1_timer_timeout"]
+[connection signal="timeout" from="sonar_room/lighting/background_2_timer" to="sonar_room/lighting" method="_on_background_2_timer_timeout"]
 [connection signal="input_event" from="steering_room/steering/wheel/wheel_area" to="steering_room/steering" method="_on_wheel_area_input_event"]
 [connection signal="input_event" from="steering_room/steering/lever/lever_area" to="steering_room/steering" method="_on_lever_area_input_event"]
-[connection signal="area_entered" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_entered"]
-[connection signal="area_exited" from="3d_world/ship_viewport/ship/Area3D" to="3d_world/ship_viewport/ship" method="_on_area_3d_area_exited"]
-[connection signal="area_entered" from="3d_world/enemy/Area3D" to="3d_world/enemy" method="_on_area_3d_area_entered"]
+[connection signal="body_entered" from="3d_world/enemy/Area3D" to="3d_world/enemy" method="_on_area_3d_body_entered"]
