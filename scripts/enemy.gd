@@ -7,7 +7,6 @@ var target: Node3D
 func _process(delta):
 	# TODO: While IDLE swim
 	if state == 'FOLLOW':
-		print('following')
 		var dir = global_position.direction_to(target.global_position)
 		global_position += (dir * speed * delta)
 
