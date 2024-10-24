@@ -186,18 +186,6 @@ viewport_path = NodePath("3d_world/ship_viewport")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46u4v"]
 size = Vector2(1930, 202)
 
-[sub_resource type="Environment" id="Environment_s2tm8"]
-background_mode = 1
-background_color = Color(0.28485, 0.28485, 0.28485, 1)
-glow_normalized = true
-glow_intensity = 5.02
-fog_enabled = true
-fog_mode = 1
-fog_light_color = Color(0, 0, 0, 1)
-fog_light_energy = 1.76
-fog_density = 1.0
-fog_depth_begin = 0.0
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_gebbv"]
 size = Vector3(0, 400, 0)
 
@@ -219,6 +207,22 @@ shader_parameter/edge_y = 1.84
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_478a3"]
 size = Vector3(1, 1, 2)
+
+[sub_resource type="Environment" id="Environment_y2hsq"]
+fog_enabled = true
+fog_mode = 1
+fog_light_energy = 0.0
+fog_density = 1.0
+fog_depth_curve = 0.615572
+fog_depth_begin = 0.0
+fog_depth_end = 300.0
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0
+volumetric_fog_gi_inject = 0.0
+volumetric_fog_length = 0.01
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_sky_affect = 0.0
+volumetric_fog_temporal_reprojection_enabled = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_its3d"]
 shader = ExtResource("23_5l4a7")
@@ -591,9 +595,6 @@ shape = SubResource("RectangleShape2D_46u4v")
 
 [node name="3d_world" type="Node3D" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="3d_world"]
-environment = SubResource("Environment_s2tm8")
-
 [node name="ship_viewport" type="SubViewport" parent="3d_world"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -616,6 +617,7 @@ debug_shape_custom_color = Color(0.986241, 0.433222, 5.77569e-07, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.364987, 0)
 attributes = SubResource("CameraAttributesPractical_lyc0i")
 current = true
+far = 250.0
 script = ExtResource("12_j8tik")
 
 [node name="ColorRect2" type="ColorRect" parent="3d_world/ship_viewport/ship"]
@@ -685,6 +687,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1176.73, -28, 128.409)
 
 [node name="enemy11" parent="3d_world/enemies" instance=ExtResource("20_15dcv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1044.73, 0, -369.591)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="3d_world"]
+environment = SubResource("Environment_y2hsq")
 
 [node name="safezones" type="Node" parent="."]
 
